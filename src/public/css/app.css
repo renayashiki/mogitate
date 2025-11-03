@@ -1,0 +1,39 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f4f7f6; /* 薄いグレーの背景 */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    /* ページのメインコンテンツコンテナの基本的な幅と中央寄せ */
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+h1, h2 {
+    /* タイトルの基本スタイル */
+    color: #007bff; /* メインカラー */
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+hr {
+    /* 区切り線の基本スタイル */
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+
+/* -------------------- ヘッダー共通スタイル -------------------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}

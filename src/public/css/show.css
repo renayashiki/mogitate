@@ -1,0 +1,108 @@
+/* フォームコンテナ (PG02専用) - レイアウトを他のフォームと合わせる */
+.form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 現在の画像表示エリア */
+.current-image-container {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+.current-image-container img {
+    max-width: 250px; /* 画像サイズを調整 */
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 詳細情報の表示 */
+.detail-info {
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.detail-row {
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #ddd;
+    display: flex;
+    font-size: 1.1em;
+}
+
+.detail-row strong {
+    flex-basis: 120px;
+    color: #555;
+}
+
+.detail-row span {
+    flex-grow: 1;
+}
+
+.detail-row .price {
+    color: #dc3545; /* 価格を赤色で強調 */
+    font-weight: bold;
+}
+
+.description-box {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    white-space: pre-wrap; /* 改行を有効にする */
+}
+
+/* -------------------- Button Styles (個別定義) -------------------- */
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.btn-base {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.2s, opacity 0.2s;
+    border: 1px solid transparent;
+}
+
+/* メインボタン (変更・更新) */
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* サブボタン (戻る) */
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* エラーメッセージ (個別定義) */
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}

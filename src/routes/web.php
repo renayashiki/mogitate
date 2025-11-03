@@ -1,18 +1,29 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// 商品一覧画面 (PG01) および 検索・並び替え (PG05/FN002, FN003, FN004)
+// クエリパラメータ付きでアクセスされた場合も、ProductController@index で処理されます。
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// indexに統合して検索機能//
+
+Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
+
+// 商品登録画面表示 (PG04)
+Route::get('/products/register', [ProductController::class, 'create'])->name('products.create');
+
+// 商品情報登録機能 (FN008)
+Route::post('/products/register', [ProductController::class, 'store'])->name('products.store');
+
+// 商品詳細画面 (PG02/FN005)
+Route::get('/products/detail/{productId}', [ProductController::class, 'show'])->name('products.show');
+
+// 商品更新画面表示 (PG03)
+Route::get('/products/{productId}/update', [ProductController::class, 'edit'])->name('products.edit');
+// 商品情報変更機能 (FN0013)
+Route::patch('/products/{productId}/update', [ProductController::class, 'update'])->name('products.update');
+
+// 商品情報削除機能 (PG06/FN0018)
+Route::delete('/products/{productId}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
