@@ -1,79 +1,98 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
+{{-- 共通CSSと合わせて、このページ固有のCSSを読み込む --}}
 @section('page_styles')
-    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 @endsection
 
+{{-- メインコンテンツラッパー --}}
 @section('content')
-<div class="form-container">
-    <h2>商品登録</h2>
-    
-    {{-- FN008: 登録機能 --}}
-    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
+    <div class="main-content-wrapper">
         
-        {{-- 商品名 (必須) --}}
-        <div class="form-group">
-            <label for="name">商品名<span class="required">必須</span></label>
-            <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="商品名">
-            {{-- Form Requestで定義されたカスタムエラーメッセージを直接表示 --}}
-            @error('name')
-                <p class="error-message">{{ $message }}</p>
-            @enderror
-        </div>
+        {{-- サイドバーのコンテンツ --}}
+        <aside class="sidebar">
+            <h2 class="sidebar-title">商品一覧</h2> 
 
-        {{-- 価格 (必須, 数値, 0〜10000) --}}
-        <div class="form-group">
-            <label for="price">値段<span class="required">必須</span></label>
-            <input type="number" id="price" name="price" value="{{ old('price') }}" placeholder="0〜10000円">
-            {{-- Form Requestで定義されたカスタムエラーメッセージを直接表示 --}}
-            @error('price')
-                <p class="error-message">{{ $message }}</p>
-            @enderror
-        </div>
-        
-        {{-- 季節 (FN0012: 複数選択, 必須) --}}
-        <div class="form-group">
-            <label>季節<span class="required">必須</span></label>
-            <div class="checkbox-group">
-                @foreach ($seasons as $season)
-                    <input type="checkbox" id="season_{{ $season->id }}" name="seasons[]" value="{{ $season->id }}" 
-                        {{ in_array($season->id, old('seasons', [])) ? 'checked' : '' }}>
-                    <label for="season_{{ $season->id }}">{{ $season->name }}</label>
-                @endforeach
+            {{-- 検索フォーム (FN002) --}}
+            <form action="{{ route('products.index') }}" method="GET" class="search-form-group">
+                <label for="keyword">商品名で検索</label>
+                <input type="text" name="keyword" id="keyword" placeholder="キーワードを入力" value="{{ request('keyword') }}">
+                <button type="submit" class="btn-base btn-search">検索</button>
+            </form>
+
+            {{-- 並び替え機能 (FN003) --}}
+            <form action="{{ route('products.index') }}" method="GET" class="sort-select-group">
+                <label for="sort">価格帯で表示</label>
+                <select name="sort" id="sort" onchange="this.form.submit()"> 
+                    <option value="" disabled {{ !request('sort') ? 'selected' : '' }}>選択してください</option>
+                    <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>高い順に表示</option>
+                    <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>低い順に表示</option>
+                </select>
+                {{-- 検索キーワードも引き継ぐ --}}
+                @if(request('keyword'))
+                    <input type="hidden" name="keyword" value="{{ request('keyword') }}">
+                @endif
+            </form>
+
+            {{-- 検索条件のリセット --}}
+            @if(request('keyword') || request('sort'))
+                <div class="search-conditions-modal">
+                    @if(request('keyword'))
+                        <span>検索: {{ request('keyword') }}</span>
+                    @endif
+                    @if(request('sort'))
+                        <span>並び替え: 
+                            {{ request('sort') == 'price_desc' ? '高い順' : '低い順' }}
+                        </span>
+                    @endif
+                    <a href="{{ route('products.index') }}" title="検索条件をリセット">×</a>
+                </div>
+            @endif
+        </aside>
+
+        {{-- メインコンテンツエリア --}}
+        <main class="content-area">
+            <div class="container"> 
+                
+                {{-- メインの商品一覧ヘッダー (「商品を追加」ボタンを右端に配置) --}}
+                <div class="main-product-header">
+                    <a href="{{ route('products.create') }}" class="btn-base btn-primary">+ 商品を追加</a>
+                </div>
+
+                <hr>
+                
+                <div class="product-content-wrapper">
+                    
+                    {{-- 検索結果件数表示 (PG05) --}}
+                    @if(request('keyword') || request('sort'))
+                        <p class="result-count">{{ $products->total() }}件の商品が見つかりました。</p>
+                    @endif
+
+                    {{-- 商品一覧表示 (FN001) --}}
+                    <div class="product-card-grid">
+                        @forelse ($products as $product)
+                            {{-- 商品詳細ページへのリンク。ルーティングのパラメータ名 {productId} を使用 --}}
+                            <a href="{{ route('products.show', ['productId' => $product->id]) }}" class="product-card">
+                                {{-- ★修正: 画像パスを asset('images/dummy/fruits-img/' . $product->image) に修正 --}}
+                                <img src="{{ asset('images/dummy/fruits-img/' . $product->image) }}" alt="{{ $product->name }}">
+                                <div class="card-info">
+                                    {{-- 商品名（左寄せ） --}}
+                                    <h3 class="product-name">{{ $product->name }}</h3>
+                                    {{-- 価格（右寄せ） --}}
+                                    <p class="price">¥{{ number_format($product->price) }}</p>
+                                </div>
+                            </a>
+                        @empty
+                            <p>商品が見つかりませんでした。</p>
+                        @endforelse
+                    </div>
+
+                    {{-- ページネーション (FN006) --}}
+                    <div class="pagination-links">
+                        {{ $products->links() }}
+                    </div>
+                </div>
             </div>
-            {{-- Form Requestで定義されたカスタムエラーメッセージを直接表示 --}}
-            @error('seasons')
-                <p class="error-message">{{ $message }}</p>
-            @enderror
-        </div>
-
-        {{-- 商品説明 (必須, 120文字以内) --}}
-        <div class="form-group">
-            <label for="description">商品説明<span class="required">必須</span></label>
-            <textarea id="description" name="description" rows="5" placeholder="商品の説明（120文字以内）">{{ old('description') }}</textarea>
-            {{-- Form Requestで定義されたカスタムエラーメッセージを直接表示 --}}
-            @error('description')
-                <p class="error-message">{{ $message }}</p>
-            @enderror
-        </div>
-        
-        {{-- 画像 (必須, .png/.jpeg) --}}
-        <div class="form-group">
-            <label for="image">画像<span class="required">必須</span></label>
-            <input type="file" id="image" name="image">
-            {{-- Form Requestで定義されたカスタムエラーメッセージを直接表示 --}}
-            @error('image')
-                <p class="error-message">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <div class="button-group">
-            {{-- 戻るボタン (FN008) --}}
-            <a href="{{ route('products.index') }}" class="btn-base btn-secondary">戻る</a> 
-            {{-- 登録ボタン (FN008) --}}
-            <button type="submit" class="btn-base btn-primary">登録</button>
-        </div>
-    </form>
-</div>
+        </main>
+    </div>
 @endsection

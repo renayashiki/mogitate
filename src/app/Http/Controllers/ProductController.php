@@ -36,7 +36,7 @@ class ProductController extends Controller
         }
 
         // FN006: ページネーション（1ページあたり9件）
-        $products = $query->paginate(9);
+        $products = $query->paginate(6);
 
         // 検索結果画面 (PG05) のURLを生成するために、検索・ソートパラメータを付加
         $products->appends($request->only(['keyword', 'sort']));

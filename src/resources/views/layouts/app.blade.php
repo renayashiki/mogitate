@@ -18,18 +18,8 @@
             <div class="header-border"></div>
         </header>
 
-        <div class="main-content-wrapper">
-            
-            @hasSection('sidebar')
-                <aside class="sidebar">
-                    @yield('sidebar')
-                </aside>
-            @endif
-
-            <main class="content-area">
-                @yield('content')
-            </main>
-        </div>
+        @yield('content')
+        
     </div>
 </body>
 </html>

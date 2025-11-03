@@ -7,10 +7,6 @@ use App\Http\Controllers\ProductController;
 // クエリパラメータ付きでアクセスされた場合も、ProductController@index で処理されます。
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
-// indexに統合して検索機能//
-
-Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
-
 // 商品登録画面表示 (PG04)
 Route::get('/products/register', [ProductController::class, 'create'])->name('products.create');
 
