@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+    
     @yield('page_styles')
 </head>
 <body>
     <div id="app">
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <header class="global-header">
+            <div class="header-content">
+                <a href="/" class="app-logo">mogitate.</a>
+                </div>
+            <div class="header-border"></div>
+        </header>
+
+        <div class="main-content-wrapper">
+            
+            @hasSection('sidebar')
+                <aside class="sidebar">
+                    @yield('sidebar')
+                </aside>
+            @endif
+
+            <main class="content-area">
+                @yield('content')
+            </main>
+        </div>
     </div>
 </body>
 </html>

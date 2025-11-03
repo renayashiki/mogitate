@@ -1,39 +1,108 @@
+/*
+|--------------------------------------------------------------------------
+| アプリケーション共通スタイル (app.css)
+|--------------------------------------------------------------------------
+|
+| 共通のボディ設定、コンテナ、区切り線、および共通ヘッダーのスタイルのみを定義します。
+|
+*/
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: #f4f7f6; /* 薄いグレーの背景 */
+    font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    background-color: #f7f7f7; /* 明るいグレーの背景 */
     color: #333;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
+    /* 全体を画面高さいっぱいに使うため */
+    height: 100vh;
+    overflow: hidden; /* メインコンテンツ全体でスクロールバーが出ないようにする */
 }
 
+#app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* -------------------- 共通ヘッダー (見本再現) -------------------- */
+.global-header {
+    background-color: #fff; /* 白い背景 */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04); 
+    flex-shrink: 0; /* ヘッダーの高さは固定 */
+}
+
+.header-content {
+    max-width: 1400px; /* 全体の幅に合わせて調整 */
+    margin: 0 auto;
+    padding: 10px 40px; 
+    display: flex; 
+    align-items: center;
+}
+
+.app-logo {
+    font-size: 26px; 
+    font-weight: 900; 
+    color: #ffc107; 
+    text-decoration: none;
+    display: inline-block;
+}
+
+.header-border {
+    height: 1px; 
+    background-color: #eee; 
+    margin: 0;
+}
+
+
+/* -------------------- 2カラムレイアウトの基本構造 (共通のFlex設定のみ) -------------------- */
+.main-content-wrapper {
+    display: flex;
+    max-width: 1400px; 
+    margin: 0 auto; 
+    padding: 30px 40px 30px 40px; 
+    align-items: flex-start; 
+    flex-grow: 1; /* 残りの高さをすべて使用 */
+    min-height: 0; 
+    overflow: hidden; 
+}
+
+.sidebar {
+    padding: 0; 
+    background-color: transparent; 
+    border-radius: 0;
+    box-shadow: none;
+    /* ページ固有のレイアウト情報は削除 */
+    overflow-y: hidden; 
+    max-height: 100%;
+}
+
+.content-area {
+    /* ページ固有のレイアウト情報は削除 */
+    min-width: 0; 
+    padding: 0; 
+    max-height: 100%; 
+    display: flex; 
+    flex-direction: column;
+    overflow: hidden; 
+}
+
+/* -------------------- その他の共通スタイル -------------------- */
 .container {
-    /* ページのメインコンテンツコンテナの基本的な幅と中央寄せ */
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    max-width: 100%; 
+    padding: 0; 
+    background-color: transparent; 
+    border-radius: 0;
+    box-shadow: none;
 }
 
-h1, h2 {
-    /* タイトルの基本スタイル */
-    color: #007bff; /* メインカラー */
+h1 {
     margin-top: 0;
-    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 hr {
-    /* 区切り線の基本スタイル */
     border: 0;
     border-top: 1px solid #eee;
-    margin: 20px 0;
-}
-
-/* -------------------- ヘッダー共通スタイル -------------------- */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+    margin: 30px 0;
 }
