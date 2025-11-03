@@ -41,14 +41,6 @@
                     <input type="hidden" name="keyword" value="{{ request('keyword') }}">
                 @endif
             </form>
-            
-
-            {{-- リセット機能 (見本にないためコメントアウトを維持) --}}
-            {{-- <div class="divider"></div> --}}
-            {{-- @if(request('keyword') || request('sort'))
-                <!-- ... リセット条件表示のBladeコード ... -->
-            @endif --}}
-            
         </aside>
 
         {{-- メインコンテンツエリア --}}
@@ -58,7 +50,7 @@
                 {{-- 「商品を追加」ボタン --}}
                 <div class="main-product-header">
                     <a href="{{ route('products.create') }}" class="btn-base btn-primary btn-add-product">
-                        <i class="fas fa-plus mr-2"></i> 商品を追加
+                        <i class="fas fa-plus mr-2"></i> +商品を追加
                     </a>
                 </div>
                 

@@ -13,7 +13,7 @@
     <div id="app">
         <header class="global-header">
             <div class="header-content">
-                <a href="/" class="app-logo">mogitate.</a>
+                <a href="/" class="app-logo">mogitate</a>
                 </div>
             <div class="header-border"></div>
         </header>
