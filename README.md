@@ -73,4 +73,25 @@ DB_PORT=3306
 // 後略
 
 ```
+- アプリケーションを実行できるようにコマンドを実行する
+```
+# php artisan key:generate
+
+```
+
+- モデルとマイグレーションファイルを作成
+```
+#  php artisan make:model Product --mig
+ration
+
+# php artisan make:model Season --migr
+ation
+
+#  php artisan make:migration create_product_season_table
+
+```
+
+- 
+
+
 
