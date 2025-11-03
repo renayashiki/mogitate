@@ -1,56 +1,3 @@
-/*
-|--------------------------------------------------------------------------
-| 商品一覧画面専用スタイル (index.css)
-|--------------------------------------------------------------------------
-*/
-
-/* -------------------- 2カラムレイアウトの基本構造 -------------------- */
-
-.main-content-wrapper {
-    display: flex;
-    /* ★修正: 最大幅を指定し、中央寄せ。左右の余白を制御 */
-    max-width: 1400px; 
-    margin: 0 auto; 
-    padding: 30px 40px 30px 0; /* 右に40px、左に0（サイドバーにパディングを移す） */
-    align-items: flex-start; 
-    flex-grow: 1; 
-    min-height: 0; 
-    height: calc(100vh - 70px); /* ヘッダーの高さを引く */
-    overflow: hidden; 
-}
-
-.sidebar {
-    /* ★修正: サイドバーを左端に密着させ、幅と右マージンを固定 */
-    width: 250px; 
-    margin-right: 40px; 
-    flex-shrink: 0; 
-    padding-left: 40px; /* ロゴと位置を合わせるためのパディング */
-    height: 100%; 
-    max-height: 100%;
-    overflow-y: hidden; 
-}
-
-.content-area {
-    /* 残りのスペースをメインコンテンツに割り当てる */
-    flex-grow: 1; 
-    min-width: 0; 
-    padding: 0; 
-    height: 100%; 
-    max-height: 100%; 
-    display: flex; 
-    flex-direction: column;
-    overflow: hidden; 
-}
-
-.container {
-    max-width: 100%; 
-    padding: 0; 
-    height: 100%; 
-    display: flex;
-    flex-direction: column;
-}
-
-
 /* -------------------- 共通要素のスタイル -------------------- */
 
 .btn-base {
@@ -60,121 +7,218 @@
     cursor: pointer;
     font-weight: bold;
     text-align: center;
-    text-decoration: none;
+    text-decoration: none; 
     transition: background-color 0.2s, box-shadow 0.2s;
     display: inline-block;
 }
 
-.btn-primary {
-    /* ★修正: 「商品を追加」ボタンのスタイル再適用を強化 */
-    background-color: #ff9800; 
-    color: #333; 
-    box-shadow: 0 3px 6px rgba(255, 152, 0, 0.3);
-    margin-left: auto; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px; 
+/* 黄色い検索ボタンのスタイル */
+.btn-search-yellow {
+    background-color: #ffc107; /* 黄色 */
+    color: #333;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px 20px; 
 }
 
-/* ... (サイドバー内のスタイルは省略) ... */
+/* 「商品を追加」ボタンのスタイル */
+.btn-primary.btn-add-product {
+    background-color: #ff9800; /* オレンジ */
+    color: #333; 
+    box-shadow: 0 3px 6px rgba(255, 152, 0, 0.3);
+    border-radius: 8px;
+    height: 40px; 
+    text-decoration: none; 
+    padding: 10px 15px;
+}
+
+/* -------------------- 2カラムレイアウトの基本構造 -------------------- */
+
+.main-content-wrapper {
+    display: flex;
+    max-width: none; 
+    margin: 0; 
+    padding: 30px 40px 30px 40px; 
+    align-items: flex-start; 
+    flex-grow: 1; 
+    min-height: 0; 
+    height: calc(100vh - 70px); 
+    overflow: hidden; 
+}
+
+.sidebar {
+    /* サイドバーの幅と右マージンを固定 */
+    width: 250px; 
+    margin-right: 40px; 
+    flex-shrink: 0; 
+    padding: 0; 
+    height: 100%; 
+    max-height: 100%;
+    overflow-y: hidden; 
+}
+
+.sidebar-title {
+    /* サイドバーのタイトルスタイル */
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.content-area {
+    flex-grow: 1; 
+    width: 100%; 
+    max-width: calc(100% - 290px); 
+    height: 100%; 
+    display: flex;
+    flex-direction: column; 
+    min-height: 0;
+}
+
+/* -------------------- サイドバー内のフォーム要素 -------------------- */
+
+.search-form-group {
+    margin-bottom: 20px; 
+}
+
+.search-form-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* ★修正1: 価格順で表示のセレクトボックスを縦並びに */
+.sort-select-group {
+    display: flex;
+    flex-direction: column; /* 縦並びにする */
+    margin-bottom: 20px;
+}
+
+.sort-select-group label {
+    margin-bottom: 8px; /* ラベルとセレクトボックスの間にスペース */
+    font-weight: bold;
+    color: #333;
+}
+
+.sort-select-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    appearance: none; 
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* ★修正1: 区切り線のスタイル */
+.divider {
+    border-bottom: 1px solid #ddd; 
+    margin: 20px 0; /* 上下の余白 */
+}
 
 /* -------------------- 商品一覧メインエリア -------------------- */
+
 .main-product-header {
     display: flex;
-    justify-content: flex-end; /* 「+商品を追加」を右端に配置 */
+    justify-content: flex-end; 
     align-items: center;
-    margin-bottom: 10px; 
+    margin-bottom: 25px; 
     flex-shrink: 0; 
 }
 
-/* -------------------- 商品カードグリッドとページネーションを画面内に収めるためのラッパー -------------------- */
+/* ★修正3: ページネーションが表示されるよう、コンテンツエリアの高さを調整 */
 .product-content-wrapper {
     display: flex;
     flex-direction: column;
     flex-grow: 1; 
-    /* ★修正: 縦スクロールをここで制御 */
     overflow-y: auto; 
     padding-right: 15px; 
     min-height: 0; 
+    /* 高さを調整し、ページネーションが表示される余裕を作る */
+    max-height: calc(100% - 50px); 
 }
+
 
 /* -------------------- 商品カードグリッド (FN001) -------------------- */
 
 .product-card-grid {
     display: grid;
-    /* 横3列を強制 */
     grid-template-columns: repeat(3, 1fr); 
-    /* 縦2列を強制。minmax(0, 1fr) で柔軟に高さを確保 */
     grid-template-rows: repeat(2, minmax(0, 1fr)); 
     gap: 30px; 
-    margin-top: 20px;
-    flex-grow: 1; 
+    flex-grow: 0; 
+    flex-shrink: 0;
+    margin-bottom: 20px;
 }
 
+/* ★修正2-1: 商品カードの枠線と角丸を調整 */
 .product-card {
-    /* ★修正: 画像と情報を保持し、プレーンなカードにする */
-    display: block; 
-    background-color: transparent; 
-    border: none; 
-    box-shadow: none; 
-    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
     text-decoration: none;
-    color: inherit;
-    position: relative; 
+    color: #333;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    /* ★修正2-1: 枠線 (border-line クラスで設定) */
+    border: 1px solid #ddd;
+    /* ★修正2-1: 全体としての正方形に近い形を確保 */
+    flex-grow: 1;
+    height: 100%; 
 }
 
 .product-card img {
     width: 100%;
-    /* 画像を正方形に近い比率で固定 */
+    /* ★修正2-2: 画像の高さを商品カードの幅に合わせて調整し、正方形に近づける */
+    max-height: 180px; 
     aspect-ratio: 1 / 1; 
     object-fit: cover;
     display: block;
-    box-shadow: none; 
+    border-top-left-radius: 7px; 
+    border-top-right-radius: 7px;
+    /* 画像と下の情報欄の間に区切り線に見えるよう、下側に薄い線 */
+    border-bottom: 1px solid #ddd;
 }
 
-.card-info {
-    /* 商品名（左寄せ）と価格（右寄せ）を確実にする Flexbox */
-    display: flex;
-    justify-content: space-between; 
-    align-items: baseline; 
-    padding: 5px 0; 
-    text-align: left; 
-}
-/* ... (商品名/価格のスタイルは省略) ... */
+/* -------------------- 商品情報 (名前と価格) -------------------- */
 
-
-/* -------------------- ページネーション (最終調整) -------------------- */
-.pagination-links {
+.product-info-row {
     display: flex;
-    justify-content: center; 
-    margin-top: 20px; 
-    padding-bottom: 20px; 
-    flex-shrink: 0; 
-    min-height: 40px; 
-}
-
-.pagination-links nav {
-    /* Laravel標準のページネーションラッパー */
-    display: flex;
-    flex-direction: row; 
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; 
-    gap: 8px; 
+    /* 情報欄のパディング */
+    padding: 10px 15px; 
+    flex-grow: 1; 
 }
 
-/* ページネーションの要素が縦並びになるのを防ぐための強制設定 */
-.pagination-links nav > div {
-    display: flex !important;
-    gap: 8px !important;
+.product-card h3.product-name {
+    margin: 0;
+    font-size: 16px;
+    font-weight: normal;
+    text-decoration: none; /* ★修正2-4: 下線リンクを削除 */
+    color: #333; /* ★修正2-4: 黒字にする */
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60%; /* 価格との間でスペースを確保 */
 }
 
-/* 「« Previous」「Next »」や件数表示を完全に非表示にする */
-.pagination-links .flex-1.justify-between,
-.pagination-links .hidden.sm\:flex-1,
-.pagination-links nav > div:first-child,
-.pagination-links nav > div > p {
-    display: none !important;
+.product-card p.price {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; /* ★修正2-4: 黒字にする */
+    text-decoration: none; /* ★修正2-4: 下線リンクを削除 */
 }
 
-/* ... (ページ番号のスタイルは省略) ... */
+/* -------------------- ページネーション (FN006) -------------------- */
+.pagination-links {
+    margin-top: 20px; 
+    padding-bottom: 10px; 
+    flex-shrink: 0;
+}
