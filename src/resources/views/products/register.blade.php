@@ -13,10 +13,11 @@
 
         <h2 class="form-title">商品登録</h2>
 
-        {{-- 【商品名】 --}}
+        {{-- 商品名 --}}
         <div class="form-group">
             <label for="name">商品名 <span class="required-badge">必須</span></label>
-            <input type="text" name="name" id="name" value="{{ old('name') }}">
+            {{-- プレースホルダーを追加 --}}
+            <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="商品名を入力">
             
             @if ($errors->has('name'))
                 @foreach ($errors->get('name') as $message)
@@ -25,11 +26,11 @@
             @endif
         </div>
 
-        {{-- 【値段】 --}}
+        {{-- 値段 --}}
         <div class="form-group">
             <label for="price">値段 <span class="required-badge">必須</span></label>
-            {{-- ★修正点：type="number" から type="text" に変更 --}}
-            <input type="text" name="price" id="price" value="{{ old('price') }}">
+            {{-- type="text" を維持し、プレースホルダーを追加 --}}
+            <input type="text" name="price" id="price" value="{{ old('price') }}" placeholder="値段を入力">
             
             @if ($errors->has('price'))
                 @foreach ($errors->get('price') as $message)
@@ -38,10 +39,9 @@
             @endif
         </div>
         
-        {{-- 【商品画像】 --}}
+        {{-- 商品画像 --}}
         <div class="form-group">
             <label for="image">商品画像 <span class="required-badge">必須</span></label>
-            {{-- CSSでファイル選択フィールドの見た目を調整しているため、HTML側は変更なし --}}
             <input type="file" name="image" id="image">
             
             @if ($errors->has('image'))
@@ -51,7 +51,7 @@
             @endif
         </div>
 
-        {{-- 【季節 (複数選択チェックボックス)】 --}}
+        {{-- 季節 (複数選択チェックボックス) --}}
         <div class="form-group">
             <label>季節 <span class="required-badge">必須</span></label>
             <div class="checkbox-group radio-style-group">
@@ -63,7 +63,7 @@
                                 value="{{ $season->id }}" 
                                 {{ is_array(old('seasons')) && in_array($season->id, old('seasons')) ? 'checked' : '' }}
                             >
-                            {{-- ★修正点：丸型UIを表示するための<span>を追加 --}}
+                            {{-- 丸型UIを表示するための<span>を維持 --}}
                             <span class="radio-text-style">{{ $season->name }}</span>
                         </label>
                     @endforeach
@@ -79,10 +79,11 @@
             @endif
         </div>
         
-        {{-- 【商品説明】 --}}
+        {{-- 商品説明 --}}
         <div class="form-group">
             <label for="description">商品説明 <span class="required-badge">必須</span></label>
-            <textarea name="description" id="description">{{ old('description') }}</textarea>
+            {{-- プレースホルダーを追加 --}}
+            <textarea name="description" id="description" placeholder="商品の説明を入力">{{ old('description') }}</textarea>
             
             @if ($errors->has('description'))
                 @foreach ($errors->get('description') as $message)
@@ -91,7 +92,7 @@
             @endif
         </div>
 
-        {{-- 【ボタン】 --}}
+        {{-- ボタン --}}
         <div class="button-group-center">
             <a href="{{ route('products.index') }}" class="btn-base btn-secondary">戻る</a> 
             <button type="submit" class="btn-base btn-primary">登録</button>
