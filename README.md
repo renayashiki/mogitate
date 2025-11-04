@@ -52,8 +52,7 @@ $ docker-compose exec php bash
 ```
 
 - .envファイルの11行目以降を以下のように修正し
-　　docker-compose.ymlで作成したデータベース　　名、ユーザ名、パスワードを.envファイルに
-　　記述する。
+  docker-compose.ymlで作成したデータベース名、ユーザ名、パスワードを.envファイルに記述する。
 
 ```
 // 前略
@@ -102,13 +101,17 @@ DB_PORT=3306
 ## 開発環境
 - phpMyAdmin: [http://localhost/admin](http://localhost/admin)
 
-- 商品一覧画面:　[http://localhost/products](http://localhost/products)
+- 商品一覧画面: [http://localhost/products](http://localhost/products)
 
-- 商品登録画面:　[http://localhost/products/register](http://localhost/products/register)
-
-
+- 商品登録画面: [http://localhost/products/register](http://localhost/products/register)
 
 
+
+## 使用技術(環境実行)
+- Laravel  8.75
+- PHP  8.1.33
+- MySQL  8.0.26
+- nginx  nginx/1.21.1
 
 
 
