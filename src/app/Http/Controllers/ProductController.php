@@ -181,8 +181,8 @@ class ProductController extends Controller
 
             DB::commit();
 
-            // FN0015: 詳細画面にリダイレクト
-            return redirect()->route('products.show', ['productId' => $product->id])
+            // 商品一覧にリダイレクト
+            return redirect()->route('products.index')
                 ->with('success', '商品情報が正常に更新されました。');
         } catch (\Exception $e) {
             DB::rollBack();
