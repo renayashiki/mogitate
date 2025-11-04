@@ -94,7 +94,7 @@
     color: #333;
     border: 1px solid #333;
     /* 【修正点2】ボタンを小さくするための調整 */
-    padding: 5px 15px;
+    padding: 5px 5px;
     width: auto;
     min-width: 120px; 
     border-radius: 4px;
@@ -181,8 +181,10 @@
     font-size: 0.95em;
 }
 
-.radio-custom-label input[type="radio"] {
-    display: none; /* 元のラジオボタンを非表示にする */
+/* ★ 修正: radio, checkboxどちらにも対応できるようにする */
+.radio-custom-label input[type="radio"],
+.radio-custom-label input[type="checkbox"] { 
+    display: none; /* 元のボタンを非表示にする */
 }
 
 .radio-custom-circle {
@@ -211,11 +213,14 @@
     transition: transform 0.2s;
 }
 
-.radio-custom-label input[type="radio"]:checked + .radio-custom-circle {
+/* ★ 修正: radio, checkbox どちらがチェックされても丸型が有効になるようにする */
+.radio-custom-label input[type="radio"]:checked + .radio-custom-circle,
+.radio-custom-label input[type="checkbox"]:checked + .radio-custom-circle {
     border-color: #ffc107; /* 選択時の枠線色 */
 }
 
-.radio-custom-label input[type="radio"]:checked + .radio-custom-circle::after {
+.radio-custom-label input[type="radio"]:checked + .radio-custom-circle::after,
+.radio-custom-label input[type="checkbox"]:checked + .radio-custom-circle::after {
     transform: translate(-50%, -50%) scale(1); /* 選択時、内側の丸を表示 */
 }
 
@@ -244,7 +249,7 @@
 }
 
 
-/* ボタンエリア (下部フッター)  */
+/* ボタンエリア (下部フッター)  */
 .button-group-bottom {
     display: flex;
     justify-content: center; 

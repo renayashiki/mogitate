@@ -175,9 +175,7 @@ class ProductController extends Controller
             // 商品情報を更新
             $product->update($updateData);
 
-            // 季節の関連付けを更新 (FN0016)
-            // ★ Form Requestで'season_id'を使う前提で、こちらでは'seasons'ではなく'season_id'を参照
-            $product->seasons()->sync([$validated['season_id']]);
+            $product->seasons()->sync($validated['seasons'] ?? []);
 
             DB::commit();
 
@@ -186,7 +184,7 @@ class ProductController extends Controller
                 ->with('success', '商品情報が正常に更新されました。');
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('商品更新エラー: ' . $e->getMessage()); // ★ ログを追加
+            Log::error('商品更新エラー: ' . $e->getMessage());
             return back()->withInput()->withErrors(['db_error' => '商品の更新中にエラーが発生しました。']);
         }
     }
