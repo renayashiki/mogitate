@@ -3,7 +3,7 @@
 ## 環境構築
 
 ### Dockerビルド
-- laravelディレクトリ以下に    laravel-docker-template.gitをクローンする。
+- laravelディレクトリ以下に    laravel-docker-template.gitをクローンする
 
 ```
 $ git clone git@github.com:Estra-Coachtech/laravel-docker-template.git
@@ -79,7 +79,7 @@ DB_PORT=3306
 
 ```
 
-- モデルとマイグレーションファイルを作成
+- モデルとマイグレーションファイルを作成しコードを記述
 ```
 #  php artisan make:model Product --migration
 
@@ -89,8 +89,12 @@ DB_PORT=3306
 
 ```
 
-- シーダーファイルを作成後、マイグレーションとシーディングを一括実施
+- シーダーファイルを作成しコード記述後、マイグレーションとシーディングを一括実施
 ```
+# php artisan make:seeder ProductSeeder
+
+# php artisan make:seeder SeasonSeeder
+
 # php artisan migrate:fresh --seed
 
 ```
@@ -102,6 +106,14 @@ DB_PORT=3306
 
 - 商品登録画面:　[http://localhost/products/register](http://localhost/products/register)
 
+
+
+
+
+
+
+## ER図
+![ER Diagram](./docs/er_diagram.drawio.png)
 
 
 
