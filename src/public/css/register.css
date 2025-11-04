@@ -1,5 +1,5 @@
 /* ---------------------------------------------------- */
-/* ページ全体レイアウトの調整 */
+/* ページ全体レイアウトの調整 (元のコードを維持) */
 /* ---------------------------------------------------- */
 
 /* メインコンテンツのコンテナ */
@@ -11,26 +11,26 @@
     box-sizing: border-box;
 }
 
-/* 2. フォームタイトル（左揃えに変更し、入力欄と位置を揃える） */
+/* フォームタイトル (元のコードを維持) */
 .form-title {
-    text-align: left; /* 左揃えに変更 */
-    font-size: 1.5em; /* フォントサイズを調整 */
+    text-align: left;
+    font-size: 1.5em; 
     font-weight: bold;
-    margin-bottom: 25px; /* 下マージンを調整 */
+    margin-bottom: 25px; 
     color: #333;
     padding-left: 0;
 }
 
 /* ---------------------------------------------------- */
-/* フォーム要素のスタイル */
+/* フォーム要素のスタイル (元のコードを維持) */
 /* ---------------------------------------------------- */
 
-/* 1. フォームグループの背景と枠線を削除 */
+/* 1. フォームグループの背景と枠線を削除 (元のコードを維持) */
 .form-group {
     margin-bottom: 30px;
-    padding: 0; /* パディングを削除 */
-    border: none; /* 枠線を削除 */
-    background-color: transparent; /* 背景色を透明に */
+    padding: 0; 
+    border: none; 
+    background-color: transparent;
 }
 
 .form-group label {
@@ -42,19 +42,23 @@
     align-items: center; 
 }
 
-/* 入力フィールド */
+/* ★★★ 修正箇所：input[type="file"] を除外する ★★★ */
+/* テキスト、数値、テキストエリアの入力フィールド（枠線が必要なもの） */
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group textarea {
     width: 100%;
     padding: 10px;
+    /* 枠線スタイル */
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
-    background-color: white; /* 入力欄自体の背景色は白に維持 */
+    background-color: white; 
     transition: border-color 0.2s;
 }
+/* ★★★ 修正箇所はここまで ★★★ */
+
 
 .form-group input[type="text"]:focus,
 .form-group input[type="number"]:focus,
@@ -63,6 +67,9 @@
     outline: none;
 }
 
+/* input[type="file"] には、テキスト入力欄の枠線が適用されないため、特別なCSSは不要 */
+
+
 /* テキストエリア */
 .form-group textarea {
     resize: vertical;
@@ -70,7 +77,7 @@
 }
 
 /* ---------------------------------------------------- */
-/* 必須マーク */
+/* 必須マーク (元のコードを維持) */
 /* ---------------------------------------------------- */
 
 .required-badge {
@@ -86,7 +93,7 @@
 }
 
 /* ---------------------------------------------------- */
-/* チェックボックスグループ (季節) - 3. 丸型表示の実現 */
+/* チェックボックスグループ (季節) (元のコードを維持) */
 /* ---------------------------------------------------- */
 
 .radio-style-group {
@@ -102,25 +109,35 @@
     align-items: center;
     margin: 0;
     cursor: pointer;
+    position: relative; 
+    padding-left: 0; 
 }
 
-/* 標準のチェックボックスを非表示 */
+/* 標準のチェックボックスを非表示にして、クリック可能にする */
 .radio-style-group input[type="checkbox"] {
-    /* ブラウザによるデフォルトの表示をリセット */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    display: none;
+    
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
 }
 
-/* カスタムチェックボックス（丸型）のスタイル */
-.radio-style-group label {
-    /* カスタム要素の配置用にposition: relative;を設定 */
+/* カスタムチェックボックス（丸型）のスタイルは、テキストのspanに::beforeで実装 */
+.radio-style-group .radio-text-style {
     position: relative;
-    padding-left: 24px; /* カスタム丸のスペースを確保 */
+    padding-left: 24px; 
+    display: flex; 
+    align-items: center;
 }
 
-.radio-style-group label::before {
+/* カスタム丸のスタイル */
+.radio-style-group .radio-text-style::before {
     content: '';
     position: absolute;
     left: 0;
@@ -129,23 +146,22 @@
     width: 16px;
     height: 16px;
     border: 1px solid #ccc;
-    border-radius: 50%; /* 丸型にする */
+    border-radius: 50%; 
     background-color: white;
     box-sizing: border-box;
     transition: all 0.2s ease;
 }
 
 /* チェックされた時のスタイル（丸を塗りつぶし） */
-.radio-style-group input[type="checkbox"]:checked + label::before {
-    background-color: #333; /* 濃い色で塗りつぶす */
+.radio-style-group input[type="checkbox"]:checked + .radio-text-style::before {
+    background-color: #333; 
     border-color: #333;
-    /* 内側に白い丸を作るためのCSS */
     box-shadow: 0 0 0 3px white inset; 
 }
 
 
 /* ---------------------------------------------------- */
-/* ボタン (中央揃えの横並び) */
+/* ボタン (中央揃えの横並び) (元のコードを維持) */
 /* ---------------------------------------------------- */
 
 .button-group-center {
@@ -191,7 +207,7 @@
 
 
 /* ---------------------------------------------------- */
-/* エラーメッセージ */
+/* エラーメッセージ (元のコードを維持) */
 /* ---------------------------------------------------- */
 
 .error-message {
