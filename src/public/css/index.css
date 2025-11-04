@@ -1,4 +1,4 @@
-/* -------------------- 共通要素のスタイル (変更なし) -------------------- */
+/* --------------------  共通要素・レイアウトスタイル -------------------- */
 .btn-base {
     padding: 10px 20px;
     border: none;
@@ -7,7 +7,6 @@
     font-weight: bold;
     text-align: center;
     text-decoration: none; 
-    transition: background-color 0.2s, box-shadow 0.2s;
     display: inline-block;
 }
 
@@ -26,16 +25,16 @@
     background-color: #ff9800; 
     color: #333; 
     box-shadow: 0 3px 6px rgba(255, 152, 0, 0.3);
-    border-radius: 8px;
-    height: 40px; 
+    border-radius: 4px;
+    height: 20px; 
     text-decoration: none; 
     padding: 10px 15px;
     display: flex; 
     align-items: center;
 }
 
-/* -------------------- 2カラムレイアウトの基本構造 (変更なし) -------------------- */
-
+/* -------------------- 
+レイアウト・カードスタイル-------------------- */
 .main-content-wrapper {
     display: flex;
     padding: 25px 30px; 
@@ -43,8 +42,6 @@
     height: auto; 
     overflow: visible; 
 }
-
-/* -------------------- サイドバー (変更なし) -------------------- */
 .sidebar {
     width: 250px; 
     margin-right: 30px; 
@@ -53,59 +50,45 @@
     max-height: none;
     overflow-y: visible; 
 }
-
 .sidebar-title {
     font-size: 24px;
     font-weight: bold;
     color: #333;
     margin-bottom: 25px;
 }
-
-/* 検索フォームグループ (変更なし) */
 .search-input-group {
     display: flex;
     flex-direction: column; 
     width: 100%;
-    margin-bottom: 0; 
+    margin-bottom: 0;
+    border-radius: 8px; 
 }
-
-/* 並び替えフォームグループ (変更なし) */
 .sort-select-group {
     display: flex;
     flex-direction: column; 
     width: 100%;
     margin-bottom: 20px; 
 }
-
-/* 検索窓とセレクトボックスの幅は100% (変更なし) */
 .search-input-group input[type="text"],
 .sort-select-group select {
     width: 100%; 
-    padding: 10px;
+    padding: 12px 20px; 
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 9999px;
+
     box-sizing: border-box;
     margin-bottom: 0; 
 }
-
-/* labelのスタイル (変更なし) */
 .sidebar label {
     display: block;
     font-weight: bold;
     color: #333;
     margin-bottom: 8px;
 }
-
-/* 区切り線（並び替えフォームの上に挿入される） (変更なし) */
 .divider {
     margin: 0; 
 }
-
-
-/* -------------------- 商品一覧メインエリア (変更なし) -------------------- */
-
 .content-area {
-    /* 横幅レスポンシブ設定を維持 */
     flex-grow: 1; 
     width: auto; 
     max-width: none; 
@@ -114,7 +97,6 @@
     flex-direction: column; 
     min-width: 0;
 }
-
 .main-product-header {
     display: flex;
     justify-content: flex-end; 
@@ -122,7 +104,6 @@
     margin-bottom: 20px; 
     flex-shrink: 0; 
 }
-
 .product-content-wrapper {
     display: flex;
     flex-direction: column;
@@ -132,9 +113,6 @@
     height: auto; 
     max-height: none; 
 }
-
-/* -------------------- 商品カードグリッド (横3列固定) (変更なし) -------------------- */
-
 .product-card-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
@@ -144,7 +122,6 @@
     margin-bottom: 10px; 
     height: auto; 
 }
-
 .product-card {
     display: flex;
     flex-direction: column; 
@@ -157,8 +134,6 @@
     overflow: hidden; 
     height: 100%; 
 }
-
-/* 画像コンテナ (正方形を維持) */
 .product-card > div:first-child {
     aspect-ratio: 1 / 1; 
     position: relative;
@@ -166,8 +141,6 @@
     overflow: hidden;
     flex-shrink: 0; 
 }
-
-/* 画像 - エリア全体を覆う（cover） */
 .product-card img {
     width: 100%;
     height: 100%; 
@@ -177,8 +150,6 @@
     border-top-right-radius: 6px;
     flex-shrink: 0; 
 }
-
-/* -------------------- 商品情報 (名前と価格) (変更なし) -------------------- */
 .product-info-row {
     display: flex;
     justify-content: space-between;
@@ -188,7 +159,6 @@
     min-height: 30px; 
     border-top: 1px solid #f0f0f0; 
 }
-
 .product-card h3.product-name {
     margin: 0;
     font-size: 13px; 
@@ -199,7 +169,6 @@
     text-overflow: ellipsis;
     max-width: 60%; 
 }
-
 .product-card p.price {
     margin: 0;
     font-size: 15px; 
@@ -208,125 +177,131 @@
     flex-shrink: 0;
 }
 
-/* -------------------- ★ページネーション最終修正 V8 (ゼロベース・リセット) -------------------- */
+
+/* -------------------- ページネーション -------------------- */
 
 .pagination-links {
     margin-top: 30px; 
     padding-bottom: 30px; 
     flex-shrink: 0; 
     display: flex;
-    justify-content: center; /* 全体を中央寄せ */
-    align-items: center;
+    justify-content: center; /* コンテナを中央寄せ */
     width: 100%; 
 }
 
-/* 1. 【Showing... テキストの絶対非表示】 */
-/* `flex-1`を持つ div 要素、または nav 以外の div 要素を全て非表示にする */
-.pagination-links > div:not(nav),
-.pagination-links > div.flex-1 { 
+/* 1. 【 Showing... テキストの絶対非表示 】 */
+.pagination-links nav > div > div:first-child { 
     display: none !important; 
-    visibility: hidden !important; 
-    width: 0 !important;
-    height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
 }
 
-/* 2. 【nav内の構造リセット】 */
-/* ページネーションのナビゲーション（nav）の中にあるコンテナdivをフレックスコンテナにする */
-.pagination-links nav > div { 
-    display: flex !important; 
-    flex-direction: row !important; 
-    align-items: center; 
-    justify-content: center; 
-    margin: 0 !important; 
-    padding: 0 !important; 
-} 
-
-/* 3. 【ページネーションのボタンコンテナ（ul/ol）のスタイル】 */
-/* `ul`や`ol`にあたる要素（多くの場合、次のネストされた`div`） */
-.pagination-links nav > div > div {
-    display: flex !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    /* ボタンの丸枠を壊す border-radius や box-shadow をリセット */
-    border-radius: 0 !important; 
-    box-shadow: none !important; 
+/* 2. ページネーションのリンクグループを確実に中央に配置 */
+.pagination-links nav > div > div:last-child {
+    display: flex;
+    justify-content: center;
     align-items: center;
+    padding: 0;
 }
 
-/* 4. 【丸形ボタンの基盤となるスタイルと間隔の確保】 */
-/* `a`, `span` (数字と矢印のコンテナ) に直接スタイルを適用 */
+/* 3. 無効なPrev/Nextリンクを完全に非表示にする */
+.pagination-links span.relative:not([aria-current="page"]) {
+    display: none !important; 
+}
+
+/* 4. すべてのリンク (a) とアクティブなページ (span) に丸ボタンの共通スタイルを適用 */
 .pagination-links a,
-.pagination-links span {
-    /* Tailwindのパディング、マージン、ボーダーを全てリセット */
-    padding: 0 !important; 
-    margin: 0 !important; 
-    border: none !important; 
+.pagination-links span[aria-current="page"] {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; /* 丸形 */
+    font-size: 14px;
+    font-weight: normal;
     
-    /* 左右に4pxのマージンを再設定し、密着を防ぐ */
-    margin: 0 4px !important; 
-    
-    /* 丸形に必要な固定サイズ */
-    width: 36px !important; 
-    min-width: 36px !important; 
-    height: 36px !important; 
-    
-    /* 丸形を復活 */
-    border-radius: 50% !important; 
-    
-    /* 背景とボーダーを再定義 */
-    background-color: #fff !important;
-    border: 1px solid #ddd !important;
-    
-    /* 中央寄せ */
-    display: flex !important;
-    align-items: center !important; 
-    justify-content: center !important; 
-    
-    color: #333 !important; 
-    font-weight: normal !important; 
-    text-decoration: none !important; 
-    transition: background-color 0.2s, border-color 0.2s;
-    flex-shrink: 0;
+    /* 共通の外観 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    text-decoration: none; 
     box-sizing: border-box;
+    position: relative; 
     
-    /* テキストの溢れ対策を強化 */
-    white-space: nowrap !important; 
-    overflow: hidden !important;
-    text-overflow: clip;
+    /* 非アクティブな状態のデフォルト */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #333 !important; /* ページ番号の数字を確実に表示 */
+    
+    transition: background-color 0.2s, border-color 0.2s;
 }
 
-
-/* 5. 【ボタン内部の要素のスタイルリセットと中央寄せ】 */
-/* ページ番号やPrev/Nextの矢印SVGが入っている内部の要素をリセットし、親の丸枠内に収める */
-.pagination-links a > *,
-.pagination-links span > * {
-    /* 内部要素が持つかもしれない不要なスタイルをリセット */
-    padding: 0 !important;
-    margin: 0 !important;
-    /* 矢印SVGなどがはみ出さないようにサイズを制限 */
-    max-width: 100% !important; 
-    max-height: 100% !important;
-    display: flex !important;
-    align-items: center !important; 
-    justify-content: center !important; 
-    overflow: hidden !important;
-    background: none !important;
+/* 5. アクティブなページ番号のスタイル */
+.pagination-links span[aria-current="page"] {
+    background-color: #ffc107; /* 黄色い背景 */
+    font-weight: bold;
+    border-color: #ffc107;
 }
 
-/* 6. 【アクティブなページ番号】のデザイン */
-.pagination-links span[aria-current="page"] { 
-    background-color: #ffc107 !important; 
-    color: #333 !important; 
-    border: 1px solid #ffc107 !important; 
-    font-weight: bold !important; 
-    pointer-events: none !important; 
+/* 6. ホバーエフェクト */
+.pagination-links a:hover {
+    background-color: #ffe082; /* 薄い黄色 */
+    border-color: #ffc107;
 }
 
-/* 7. 【ホバーエフェクト】 */
-.pagination-links a:hover { 
-    border-color: #ffc107 !important; 
-    background-color: #fff8e1 !important; 
+/* 7. Prev/Nextリンクのテキストを非表示にする（矢印リンクの文字だけを消す） */
+.pagination-links a[rel="prev"] > span,
+.pagination-links a[rel="next"] > span {
+    color: transparent !important;
+}
+
+/* 8. 矢印アイコン（SVG）の調整 */
+.pagination-links a svg {
+    fill: #333; 
+    color: #333; 
+    width: 16px;
+    height: 16px;
+    
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block !important; 
+}
+
+/* -------------------- 適用中のフィルタボタンのスタイル -------------------- */
+
+/* 適用中のフィルタボタンのラッパー */
+.current-filter-group {
+    margin-top: 15px; /* 並び替えフォームと適度な間隔を空ける */
+    padding-top: 10px;
+    border-top: 1px solid #eee; /* 区切り線 */
+}
+
+/* 適用中のフィルタ（黄色いボタン）のスタイル */
+.btn-filter-applied {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    background-color: #FFEB3B; /* 鮮やかな黄色 */
+    color: #333;
+    font-size: 14px;
+    border-radius: 16px; /* 角丸のピル型 */
+    border: 1px solid #FFD700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-filter-applied:hover {
+    background-color: #FFD700; /* ホバーで少し濃く */
+}
+
+/* 削除アイコンのスタイル */
+.filter-close-icon {
+    margin-left: 8px;
+    font-size: 16px; /* アイコンサイズ */
+    color: #888;
+}
+
+.btn-filter-applied:hover .filter-close-icon {
+    color: #333; /* ホバーでアイコンの色も濃く */
 }

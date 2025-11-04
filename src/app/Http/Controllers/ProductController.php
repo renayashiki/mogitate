@@ -35,14 +35,29 @@ class ProductController extends Controller
             $query->orderBy('id', 'desc');
         }
 
-        // FN006: ページネーション（1ページあたり9件）
+        // FN006: ページネーション（1ページあたり6件）
         $products = $query->paginate(6);
 
         // 検索結果画面 (PG05) のURLを生成するために、検索・ソートパラメータを付加
         $products->appends($request->only(['keyword', 'sort']));
 
+        // ★★★ 修正箇所: getCurrentSortLabelのロジックをここに直接組み込みます ★★★
+
+        $currentSortKey = $sort;
+        $currentSortLabel = null;
+
+        $labels = [
+            'price_desc' => '価格が高い順',
+            'price_asc' => '価格が低い順',
+        ];
+
+        // ソートキーに対応するラベルを取得
+        if (isset($labels[$currentSortKey])) {
+            $currentSortLabel = $labels[$currentSortKey];
+        }
+
         // 検索結果と一覧画面は同じビューを共有
-        return view('products.index', compact('products'));
+        return view('products.index', compact('products', 'currentSortKey', 'currentSortLabel'));
     }
 
     /**
@@ -66,6 +81,7 @@ class ProductController extends Controller
         DB::beginTransaction();
         try {
             // 画像の保存 (FN0010)
+            // 'products'フォルダに画像を保存し、'public'ディスクを使用
             $imagePath = $request->file('image')->store('products', 'public');
 
             // 商品の登録
@@ -73,6 +89,7 @@ class ProductController extends Controller
                 'name' => $validated['name'],
                 'price' => $validated['price'],
                 'description' => $validated['description'],
+                // storage/products/ファイル名 の形式で保存
                 'image' => $imagePath,
             ]);
 
@@ -137,6 +154,8 @@ class ProductController extends Controller
             if ($request->hasFile('image')) {
                 // 古い画像を削除
                 if ($product->image) {
+                    // 古い画像がダミーではない（products/から始まる）ことを確認してから削除する方がより安全ですが、
+                    // 現状のダミー画像は 'banana.png' のようなファイル名なので、Storage::delete()では削除対象外になるため問題ありません。
                     Storage::disk('public')->delete($product->image);
                 }
                 // 新しい画像を保存
@@ -171,10 +190,12 @@ class ProductController extends Controller
         try {
             // 画像ファイルの削除
             if ($product->image) {
+                // ダミー画像ではない場合のみ、ストレージから削除
+                // ダミー画像が 'products/' パスを含まないため、この削除処理は安全です。
                 Storage::disk('public')->delete($product->image);
             }
 
-            // 商品と季節の関連付けを削除（不要だが安全のため）
+            // 商品と季節の関連付けを削除
             $product->seasons()->detach();
 
             // 商品を削除
