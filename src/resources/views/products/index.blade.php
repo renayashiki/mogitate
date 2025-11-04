@@ -47,14 +47,17 @@
             @if (!empty($currentSortKey))
                 @php
                     // 表示文言の決定（ご要望に応じて修正）
-                    $label = '';
+                    $label_prefix = '';
                     if ($currentSortKey === 'price_desc') {
                         // 価格が高い順の場合
-                        $label = '高い順に表示';
+                        $label_prefix = '高い順に表示';
                     } elseif ($currentSortKey === 'price_asc') {
                         // 価格が低い順の場合
-                        $label = '低い順に表示';
+                        $label_prefix = '低い順に表示';
                     }
+                    
+                    // ユーザーに消せることをアピールする「×」を追記
+                    $label = $label_prefix . ' ×';
                     
                     $currentQueries = request()->query();
                     // 'sort' パラメータを削除
@@ -63,13 +66,13 @@
                     $resetUrl = route('products.index', $currentQueries);
                 @endphp
 
-                @if(!empty($label))
+                @if(!empty($label_prefix))
                     <div class="current-filter-group">
                         <a href="{{ $resetUrl }}" 
                             class="btn-base btn-filter-applied" 
                             title="クリックして並び替えを解除">
                             
-                            {{-- 修正後の表示ラベル --}}
+                            {{-- 修正後の表示ラベル（「×」を含む） --}}
                             {{ $label }}
                             
                             {{-- 削除アイコン (Font Awesome) --}}
