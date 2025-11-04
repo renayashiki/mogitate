@@ -1,4 +1,4 @@
-/* --------------------  共通要素・レイアウトスタイル -------------------- */
+/* -------------------- 共通要素・レイアウトスタイル -------------------- */
 .btn-base {
     padding: 10px 20px;
     border: none;
@@ -61,7 +61,7 @@
     flex-direction: column; 
     width: 100%;
     margin-bottom: 0;
-    border-radius: 8px; 
+    /* 検索インプットのラッパーの角丸は不要 */
 }
 .sort-select-group {
     display: flex;
@@ -69,16 +69,27 @@
     width: 100%;
     margin-bottom: 20px; 
 }
-.search-input-group input[type="text"],
+
+/* ★★★ 修正箇所: 検索窓のスタイルを分離し、丸型を維持 ★★★ */
+.search-input-group input[type="text"] {
+    width: 100%; 
+    padding: 12px 20px; 
+    border: 1px solid #ccc;
+    border-radius: 9999px; /* 検索窓を丸くする */
+    box-sizing: border-box;
+    margin-bottom: 0; 
+}
+
+/* ★★★ 修正箇所: セレクトボックスのスタイルを分離し、標準の角丸に戻す ★★★ */
 .sort-select-group select {
     width: 100%; 
     padding: 12px 20px; 
     border: 1px solid #ccc;
-    border-radius: 9999px;
-
+    border-radius: 4px; /* 標準の角丸 (4px) を適用 */
     box-sizing: border-box;
     margin-bottom: 0; 
 }
+
 .sidebar label {
     display: block;
     font-weight: bold;
@@ -299,9 +310,9 @@
 .filter-close-icon {
     margin-left: 8px;
     font-size: 16px; /* アイコンサイズ */
-    color: #888;
+    color: #333; /* ✖️を黒（濃い色）に変更 */
 }
 
 .btn-filter-applied:hover .filter-close-icon {
-    color: #333; /* ホバーでアイコンの色も濃く */
+    color: #111; /* ホバーでアイコンの色をさらに濃く */
 }
