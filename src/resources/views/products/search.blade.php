@@ -62,9 +62,5 @@
         @endforelse
     </div>
 
-    {{-- ページネーション (FN006) --}}
-    <div class="pagination-links">
-        {{ $products->links() }}
-    </div>
 </div>
 @endsection

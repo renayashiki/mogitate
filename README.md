@@ -81,17 +81,31 @@ DB_PORT=3306
 
 - モデルとマイグレーションファイルを作成
 ```
-#  php artisan make:model Product --mig
-ration
+#  php artisan make:model Product --migration
 
-# php artisan make:model Season --migr
-ation
+# php artisan make:model Season --migration
 
 #  php artisan make:migration create_product_season_table
 
 ```
 
-- 
+- シーダーファイルを作成後、マイグレーションとシーディングを一括実施
+```
+# php artisan migrate:fresh --seed
+
+```
+
+## 開発環境
+- phpMyAdmin: [http://localhost/admin](http://localhost/admin)
+
+- 商品一覧画面:　[http://localhost/products](http://localhost/products)
+
+- 商品登録画面:　[http://localhost/products/register](http://localhost/products/register)
+
+
+
+
+
 
 
 
