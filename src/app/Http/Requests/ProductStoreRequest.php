@@ -24,21 +24,26 @@ class ProductStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            // 商品名: 入力必須
-            'name' => ['required', 'string'],
+            // a. 全ての項目が入力必須
+            'name' => 'required|string|max:255',
 
-            // 値段: 入力必須、整数値、0以上10000以下
-            'price' => ['required', 'integer', 'min:0', 'max:10000'],
+            // b. 値段は数値、0円以上〜10000円以内
+            'price' => 'required|numeric|min:0|max:10000',
 
-            // 季節: 選択必須（配列として存在し、各要素がseasonテーブルのIDであること）
-            // arrayとexistsは不正な値が入った場合の対策で、見た目のrequiredエラーは 'required'で処理
-            'seasons' => ['required', 'array', 'exists:seasons,id'],
+            // c. 画像の拡張子は「.png」もしくは「.jpeg」形式でのみアップロード可能
+            // 例外の「2MB以内」のルールも追加（2048KB）
+            'image' => [
+                'required',
+                'image',
+                'mimes:png,jpeg', // 拡張子をpngとjpegに限定
+                'max:2048'     // 2MB (2048KB) を上限とする
+            ],
 
-            // 商品説明: 入力必須、最大120文字
-            'description' => ['required', 'string', 'max:120'],
+            // 季節は必須、配列形式で、かつDBに存在するIDであること
+            'seasons' => 'required|array|exists:seasons,id',
 
-            // 画像: アップロード必須、MIMEタイプがjpegまたはpng
-            'image' => ['required', 'file', 'mimes:jpeg,png'],
+            // a. 必須かつ d. 入力文字数は120文字以内
+            'description' => 'required|string|max:120',
         ];
     }
 
@@ -55,27 +60,21 @@ class ProductStoreRequest extends FormRequest
 
             // 値段
             'price.required' => '値段を入力してください',
-            'price.integer' => '数値で入力してください',
-            // maxとminのエラーを同じメッセージに設定
-            'price.min' => '0∼10000円以内で入力してください',
-            'price.max' => '0∼10000円以内で入力してください',
-
-            // 季節
-            // 'required'で選択されていないエラーを捕捉する
-            'seasons.required' => '季節を選択してください',
-            // 'array'や'exists'エラーはユーザーには見せないが、念のため設定
-            'seasons.array' => '季節を選択してください',
-            'seasons.exists' => '不正な季節が選択されました',
-
-            // 商品説明
-            'description.required' => '商品説明を入力してください',
-            'description.max' => '120文字以内で入力してください',
+            'price.numeric' => '値段は数値で入力してください', 
+            'price.min' => '値段は0円以上にしてください',
+            'price.max' => '値段は10000円以内で入力してください', 
 
             // 画像
             'image.required' => '画像を登録してください',
-            // 'file'エラーは必須と統合
-            'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
-            // 'mimes'ルールは画像がアップロードされたが拡張子が不正な場合にのみ発火する
+            'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください', 
+            'image.max' => 'ファイルサイズは2MB以内の画像を選択してください', // 例外として維持
+
+            // 季節
+            'seasons.required' => '季節を選択してください',
+
+            // 商品説明
+            'description.required' => '商品説明を入力してください',
+            'description.max' => '商品説明の入力文字数は120文字以内で入力してください',
         ];
     }
 }
