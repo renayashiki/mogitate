@@ -1,33 +1,36 @@
+/* ---------------------------------------------------- */
+/* ページ全体レイアウトの調整 */
+/* ---------------------------------------------------- */
+
+/* メインコンテンツのコンテナ */
 .register-container {
-    /* フォームを画面中央付近に配置するための設定 */
-    max-width: 600px; /* フォームの最大幅を設定 */
+    max-width: 600px; 
     width: 100%;
     margin: 40px auto;
-    padding: 0 20px; /* モバイル対応のための左右パディング */
+    padding: 0 20px; 
     box-sizing: border-box;
 }
 
-/* フォームタイトル */
+/* 2. フォームタイトル（左揃えに変更し、入力欄と位置を揃える） */
 .form-title {
-    text-align: center;
-    font-size: 1.8em;
+    text-align: left; /* 左揃えに変更 */
+    font-size: 1.5em; /* フォントサイズを調整 */
     font-weight: bold;
-    margin-bottom: 30px;
+    margin-bottom: 25px; /* 下マージンを調整 */
     color: #333;
+    padding-left: 0;
 }
 
 /* ---------------------------------------------------- */
 /* フォーム要素のスタイル */
 /* ---------------------------------------------------- */
 
-/* フォームグループ */
-/* 各入力フィールドを見本のように白い背景で囲む */
+/* 1. フォームグループの背景と枠線を削除 */
 .form-group {
-    margin-bottom: 25px;
-    padding: 15px;
-    border: 1px solid #ddd; /* 見本の境界線に近いスタイル */
-    border-radius: 4px;
-    background-color: #ffffff; 
+    margin-bottom: 30px;
+    padding: 0; /* パディングを削除 */
+    border: none; /* 枠線を削除 */
+    background-color: transparent; /* 背景色を透明に */
 }
 
 .form-group label {
@@ -36,7 +39,7 @@
     font-weight: bold;
     color: #333;
     display: flex;
-    align-items: center; /* 必須バッジとラベルの縦位置を揃える */
+    align-items: center; 
 }
 
 /* 入力フィールド */
@@ -49,6 +52,7 @@
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
+    background-color: white; /* 入力欄自体の背景色は白に維持 */
     transition: border-color 0.2s;
 }
 
@@ -62,46 +66,37 @@
 /* テキストエリア */
 .form-group textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 120px;
 }
-
-/* 画像アップロードの見た目を調整 */
-.form-group input[type="file"] {
-    /* デフォルトのinput[type=file]のスタイルをリセット/調整 */
-    padding: 8px 0; 
-    border: none;
-    background-color: transparent;
-}
-
 
 /* ---------------------------------------------------- */
-/* 必須マーク（赤い四角の中に白文字で「必須」） */
+/* 必須マーク */
 /* ---------------------------------------------------- */
 
 .required-badge {
-    background-color: #dc3545; /* 見本に合わせた赤色 */
+    background-color: #dc3545; 
     color: white;
     font-size: 0.75em;
     font-weight: normal; 
     padding: 3px 6px;
     border-radius: 3px;
     margin-left: 8px;
-    white-space: nowrap; /* 折り返しを防ぐ */
+    white-space: nowrap; 
     vertical-align: middle;
 }
 
 /* ---------------------------------------------------- */
-/* チェックボックスグループ (季節) */
+/* チェックボックスグループ (季節) - 3. 丸型表示の実現 */
 /* ---------------------------------------------------- */
 
-.checkbox-group {
+.radio-style-group {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     padding: 5px 0;
 }
 
-.checkbox-group label {
+.radio-style-group label {
     font-weight: normal;
     display: inline-flex;
     align-items: center;
@@ -109,10 +104,45 @@
     cursor: pointer;
 }
 
-.checkbox-group input[type="checkbox"] {
-    width: auto;
-    margin-right: 5px;
+/* 標準のチェックボックスを非表示 */
+.radio-style-group input[type="checkbox"] {
+    /* ブラウザによるデフォルトの表示をリセット */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: none;
 }
+
+/* カスタムチェックボックス（丸型）のスタイル */
+.radio-style-group label {
+    /* カスタム要素の配置用にposition: relative;を設定 */
+    position: relative;
+    padding-left: 24px; /* カスタム丸のスペースを確保 */
+}
+
+.radio-style-group label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    border-radius: 50%; /* 丸型にする */
+    background-color: white;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+/* チェックされた時のスタイル（丸を塗りつぶし） */
+.radio-style-group input[type="checkbox"]:checked + label::before {
+    background-color: #333; /* 濃い色で塗りつぶす */
+    border-color: #333;
+    /* 内側に白い丸を作るためのCSS */
+    box-shadow: 0 0 0 3px white inset; 
+}
+
 
 /* ---------------------------------------------------- */
 /* ボタン (中央揃えの横並び) */
@@ -120,8 +150,8 @@
 
 .button-group-center {
     display: flex;
-    justify-content: center; /* 中央揃え */
-    gap: 20px; /* ボタン間のスペース */
+    justify-content: center; 
+    gap: 20px; 
     margin-top: 40px;
 }
 
