@@ -60,8 +60,7 @@
                         <p class="result-count">{{ $products->total() }}件の商品が見つかりました。</p>
                     @endif
 
-                    {{-- 商品一覧表示 (FN001) --}}
-                    {{-- ★修正2: グリッドレイアウトはそのままに、CSSでカードサイズを小さくする --}}
+                    {{-- 商品一覧表示  --}}
                     <div class="product-card-grid">
                         @forelse ($products as $product)
                             <a href="{{ route('products.show', ['productId' => $product->id]) }}" class="product-card">
@@ -77,9 +76,11 @@
                     </div>
 
                     {{-- ページネーション (FN006) --}}
+                    {{-- ページネーションリンクを動的に表示し、検索/並び替えパラメータを維持する --}}
                     <div class="pagination-links">
-                        {{ $products->links() }}
+                        {{ $products->appends(['keyword' => request('keyword'), 'sort' => request('sort')])->links() }}
                     </div>
+
                 </div>
             </div>
         </main>
