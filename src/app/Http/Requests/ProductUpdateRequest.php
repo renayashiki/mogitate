@@ -31,7 +31,7 @@ class ProductUpdateRequest extends FormRequest
             'price' => ['required', 'integer', 'min:0', 'max:10000'],
 
             // 季節: 選択必須
-            'seasons' => ['required', 'array', 'exists:seasons,id'],
+            'season_id' => ['required', 'exists:seasons,id'],
 
             // 商品説明: 入力必須、最大120文字
             'description' => ['required', 'string', 'max:120'],
@@ -54,7 +54,7 @@ class ProductUpdateRequest extends FormRequest
             'price.max' => '0∼10000円以内で入力してください',
 
             // 季節
-            'seasons.required' => '季節を選択してください',
+            'season_id.required' => '季節を選択してください',
 
             // 商品説明
             'description.required' => '商品説明を入力してください',

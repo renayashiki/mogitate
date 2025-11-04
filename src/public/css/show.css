@@ -69,39 +69,64 @@
     display: block;
 }
 
-.file-instruction {
+/* 以前のファイル説明用テキストは新しいクラスに置き換え */
+/* .file-instruction {
     font-size: 0.85em;
     color: #777;
     margin-bottom: 20px;
-}
+} */
 
 /* ファイルアップロードボタンのカスタムスタイル */
+/* 以前のファイル入力グループのスタイルを調整 */
 .file-input-group {
+    /* 以前の flex/column/center の設定を削除 */
+    margin-bottom: 0; 
+}
+
+/* ★【修正点2】ファイルボタンとファイル名を横並びにする新しいコンテナ */
+.file-upload-row {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
+    align-items: center; /* 垂直方向中央揃え */
+    justify-content: center; /* 水平方向中央揃え */
+    gap: 15px; /* ボタンとファイル名の間隔 */
+    margin-top: 10px; /* 画像との間隔 */
+    margin-bottom: 10px; /* エラーメッセージとの間隔 */
 }
 
 .file-input-hidden {
     display: none;
 }
 
-.btn-file-label {
+.btn-base.btn-file-label {
     background-color: #ebe7e7e7;
     color: #333;
     border: 1px solid #333;
-    padding: 2px 6px;
+    /* 【修正点2】ボタンを小さくするための調整 */
+    padding: 5px 15px;
+    width: auto;
+    min-width: 120px; 
     border-radius: 4px;
     cursor: pointer;
     font-weight: normal;
     transition: background-color 0.2s;
-    width: 60%;
     text-align: center;
+    font-size: 0.9em; 
 }
 
 .btn-file-label:hover {
     background-color: #eee;
+}
+
+/* ★【修正点2】現在のファイル名表示のスタイル */
+.current-filename-display {
+    font-size: 0.85em;
+    color: #777;
+    margin: 0;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    text-align: left;
 }
 
 

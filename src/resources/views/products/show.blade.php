@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-{{-- 2. 見本画像にある通り、画像の上に 商品一覧>バナナ(商品により変動) 表示を追加 --}}
+{{-- 1. 商品一覧>バナナを画像の真上に配置 --}}
 <div class="breadcrumb-container">
     <a href="{{ route('products.index') }}" class="breadcrumb-link">商品一覧</a>
     <span class="breadcrumb-separator">></span>
@@ -18,7 +18,8 @@
 {{-- 1. 白い背景カードをなくすため、formタグの最上位クラスを変更 --}}
 <form action="{{ route('products.update', ['productId' => $product->id]) }}" method="POST" enctype="multipart/form-data" class="product-detail-form">
     @csrf
-    @method('PUT') 
+    {{-- ★ここをPUTからPATCHに変更します。ルーターがPATCHを要求しているためです。 --}}
+    @method('PATCH') 
 
     <div class="form-content-wrapper">
         {{-- 【左側】商品画像エリア (FN005, FN0017) --}}
@@ -33,19 +34,27 @@
                 <img src="{{ $uploadedImagePath }}"
                     alt="{{ $product->name }}"
                     class="product-actual-image"
-                    {{-- ★ Bladeパースエラー修正済み：onerror内のJavaScript文字列をe()で安全にエスケープ --}}
+                    {{-- Bladeパースエラー修正済み：onerror内のJavaScript文字列をe()で安全にエスケープ --}}
                     onerror="this.onerror=null; this.src='{{ $dummyImagePath }}'; this.onerror = function() { this.src='https://placehold.co/250x250/98c1d9/000?text={{ e($product->name) }}'; };"
                 >
             </div>
             
-            <div class="form-group file-input-group">
+            {{-- ★【修正点2】ファイル選択ボタンとファイル名を横並びにするための新しいコンテナ --}}
+            <div class="file-upload-row">
                 <input type="file" name="image" id="image" class="file-input-hidden">
                 <label for="image" class="btn-base btn-file-label">ファイルを選択</label>
-                @error('image')
-                    <span class="error-message">{{ $message }}</span>
-                @enderror
+                
+                <p class="file-instruction current-filename-display">
+                    {{ $product->image ?: '画像未登録' }}
+                </p>
             </div>
-            <p class="file-instruction">現在のファイル名: {{ $product->image ?: '画像未登録' }}</p>
+
+            @error('image')
+                {{-- エラーメッセージを画像エリアの直下に移動 --}}
+                <div class="form-group error-message-group">
+                    <span class="error-message">{{ $message }}</span>
+                </div>
+            @enderror
         </div>
 
         {{-- 5. 商品名・値段・季節を全体的に下にずらして画像の下線のラインに合わせて配置 --}}

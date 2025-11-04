@@ -1,50 +1,104 @@
-/* フォームコンテナ (PG04専用) */
-.form-container {
-    max-width: 600px;
+.register-container {
+    /* フォームを画面中央付近に配置するための設定 */
+    max-width: 600px; /* フォームの最大幅を設定 */
+    width: 100%;
     margin: 40px auto;
-    padding: 30px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0 20px; /* モバイル対応のための左右パディング */
+    box-sizing: border-box;
 }
 
+/* フォームタイトル */
+.form-title {
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* ---------------------------------------------------- */
+/* フォーム要素のスタイル */
+/* ---------------------------------------------------- */
+
 /* フォームグループ */
+/* 各入力フィールドを見本のように白い背景で囲む */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    padding: 15px;
+    border: 1px solid #ddd; /* 見本の境界線に近いスタイル */
+    border-radius: 4px;
+    background-color: #ffffff; 
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center; /* 必須バッジとラベルの縦位置を揃える */
 }
 
 /* 入力フィールド */
 .form-group input[type="text"],
 .form-group input[type="number"],
-.form-group textarea,
-.form-group select {
+.form-group textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
+    transition: border-color 0.2s;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* テキストエリア */
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
 }
 
 /* 画像アップロードの見た目を調整 */
 .form-group input[type="file"] {
-    border: 1px dashed #ccc;
-    padding: 15px;
-    background-color: #fafafa;
+    /* デフォルトのinput[type=file]のスタイルをリセット/調整 */
+    padding: 8px 0; 
+    border: none;
+    background-color: transparent;
 }
 
-/* Checkbox Group for Seasons */
+
+/* ---------------------------------------------------- */
+/* 必須マーク（赤い四角の中に白文字で「必須」） */
+/* ---------------------------------------------------- */
+
+.required-badge {
+    background-color: #dc3545; /* 見本に合わせた赤色 */
+    color: white;
+    font-size: 0.75em;
+    font-weight: normal; 
+    padding: 3px 6px;
+    border-radius: 3px;
+    margin-left: 8px;
+    white-space: nowrap; /* 折り返しを防ぐ */
+    vertical-align: middle;
+}
+
+/* ---------------------------------------------------- */
+/* チェックボックスグループ (季節) */
+/* ---------------------------------------------------- */
+
 .checkbox-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    padding: 10px 0;
+    gap: 20px;
+    padding: 5px 0;
 }
 
 .checkbox-group label {
@@ -52,6 +106,7 @@
     display: inline-flex;
     align-items: center;
     margin: 0;
+    cursor: pointer;
 }
 
 .checkbox-group input[type="checkbox"] {
@@ -59,16 +114,19 @@
     margin-right: 5px;
 }
 
-/* -------------------- Button Styles (個別定義) -------------------- */
+/* ---------------------------------------------------- */
+/* ボタン (中央揃えの横並び) */
+/* ---------------------------------------------------- */
 
-.button-group {
+.button-group-center {
     display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
+    justify-content: center; /* 中央揃え */
+    gap: 20px; /* ボタン間のスペース */
+    margin-top: 40px;
 }
 
 .btn-base {
-    padding: 10px 20px;
+    padding: 10px 30px; 
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
@@ -76,41 +134,39 @@
     text-align: center;
     transition: background-color 0.2s, opacity 0.2s;
     border: 1px solid transparent;
+    min-width: 100px; 
 }
 
-/* メインボタン (登録) */
+/* メインボタン (登録) - 黄色 */
 .btn-primary {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
+    background-color: #ffc107; 
+    color: #333;
+    border-color: #ffc107;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #e0a800;
 }
 
-/* サブボタン (戻る) */
+/* サブボタン (戻る) - 白/グレー */
 .btn-secondary {
-    background-color: #6c757d;
-    color: white;
-    border-color: #6c757d;
+    background-color: #f8f9fa; 
+    color: #333;
+    border-color: #ccc;
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268;
+    background-color: #e2e6ea;
 }
 
-/* エラーメッセージ (個別定義) */
+
+/* ---------------------------------------------------- */
+/* エラーメッセージ */
+/* ---------------------------------------------------- */
+
 .error-message {
-    color: red;
+    color: #dc3545; 
     font-size: 0.9em;
     margin-top: 5px;
-}
-
-/* 必須マーク (個別定義) */
-.required {
-    color: red;
-    font-size: 1.2em;
-    vertical-align: middle;
-    margin-left: 5px;
+    display: block;
 }
