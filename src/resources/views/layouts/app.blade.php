@@ -14,7 +14,8 @@
     <div id="app">
         <header class="global-header">
             <div class="header-content">
-                <a href="/" class="app-logo">mogitate</a>
+                {{-- mogitateをクリックするとproducts.indexルート（/products）に戻るように修正 --}}
+                <a href="{{ route('products.index') }}" class="app-logo">mogitate</a>
                 </div>
             <div class="header-border"></div>
         </header>

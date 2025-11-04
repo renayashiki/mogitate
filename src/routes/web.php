@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
+// 修正箇所: トップページURL（/）へのアクセスを商品一覧ページにリダイレクトするルートを追加
+Route::get('/', function () {
+  return redirect()->route('products.index');
+});
+
 // 商品一覧画面 (PG01) および 検索・並び替え (PG05/FN002, FN003, FN004)
 // クエリパラメータ付きでアクセスされた場合も、ProductController@index で処理されます。
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
