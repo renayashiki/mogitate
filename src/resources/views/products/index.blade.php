@@ -16,7 +16,7 @@
             {{-- 1. 検索フォーム (FN002) --}}
             <form action="{{ route('products.index') }}" method="GET" class="search-input-group">
                 <input type="text" name="keyword" id="keyword" placeholder="商品名で検索" value="{{ request('keyword') }}">
-                
+
                 {{-- 検索ボタンのためのhiddenフィールド --}}
                 @if(request('sort'))
                     <input type="hidden" name="sort" value="{{ request('sort') }}">
@@ -87,7 +87,7 @@
         <main class="content-area">
             <div class="container"> 
                 
-                {{-- 「商品を追加」ボタン (変更なし) --}}
+                {{-- 「商品を追加」ボタン --}}
                 <div class="main-product-header">
                     <a href="{{ route('products.create') }}" class="btn-base btn-primary btn-add-product">
                         <i class="fas fa-plus mr-2"></i> +商品を追加

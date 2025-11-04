@@ -82,7 +82,6 @@ class ProductController extends Controller
         DB::beginTransaction();
         try {
             // 画像の保存 (FN0010)
-            // 'products'フォルダに画像を保存し、'public'ディスクを使用
             $imagePath = $request->file('image')->store('products', 'public');
 
             // 商品の登録
@@ -100,7 +99,7 @@ class ProductController extends Controller
             DB::commit();
 
             // FN009: 詳細画面にリダイレクト
-            return redirect()->route('products.show', ['productId' => $product->id])
+            return redirect()->route('products.index')
                 ->with('success', '商品が正常に登録されました。');
         } catch (\Exception $e) {
             DB::rollBack();

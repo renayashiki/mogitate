@@ -69,15 +69,7 @@
     display: block;
 }
 
-/* 以前のファイル説明用テキストは新しいクラスに置き換え */
-/* .file-instruction {
-    font-size: 0.85em;
-    color: #777;
-    margin-bottom: 20px;
-} */
-
 /* ファイルアップロードボタンのカスタムスタイル */
-/* 以前のファイル入力グループのスタイルを調整 */
 .file-input-group {
     /* 以前の flex/column/center の設定を削除 */
     margin-bottom: 0; 
@@ -252,66 +244,67 @@
 }
 
 
-/* -------------------- 6. ボタンエリア (下部フッター) -------------------- */
+/* ボタンエリア (下部フッター)  */
 .button-group-bottom {
     display: flex;
-    justify-content: center; /* 中央揃え */
+    justify-content: center; 
     gap: 20px; 
     margin-top: 40px;
     padding-top: 20px;
 }
 
+/* 【ボタンの見た目を調整】 */
 .btn-base {
-    padding: 12px 25px;
-    border-radius: 4px;
+    padding: 10px 25px; /* サイズを微調整 */
+    border-radius: 6px; /* 角を少し丸く */
     cursor: pointer;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700; /* 太字を明確に指定 */
     text-align: center;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, box-shadow 0.2s;
     border: none;
 }
 
-/* サブボタン (戻る) */
+/* ボタン (戻る) - よりクリーンで分かりやすいデザインに調整 */
 .btn-secondary {
-    background-color: #6c757d;
-    color: white;
+    background-color: #f0f0f0; 
+    color: #333;
+    border: 1px solid #ccc; /* 枠線を追加 */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* 影を追加 */
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268;
+    background-color: #e0e0e0; /* ホバーで少し濃く */
+    color: #333;
 }
 
-/* メインボタン (変更を保存) */
+/* ボタン (変更を保存) - メインカラーの強調と影の調整 */
 .btn-primary-update {
     background-color: #ffc107;
     color: #333;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(255, 193, 7, 0.3), 0 1px 3px rgba(0, 0, 0, 0.08); /* 黄色を強調した影 */
 }
 
 .btn-primary-update:hover {
     background-color: #ffdb58;
+    box-shadow: 0 6px 8px rgba(255, 193, 7, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1); /* ホバーで影を強調 */
 }
 
-/* 7. 削除ボタン (ゴミ箱アイコン) */
+/* 7. 削除ボタン (ゴミ箱アイコン) - 配置とホバー時の見た目を調整 */
 .btn-delete-icon {
-    /* 枠や背景なし/アイコン自体を赤に */
     background: none;
     border: none;
     color: #dc3545; /* 赤色 */
     cursor: pointer;
     padding: 0;
-    margin-left: 10px; /* 戻る/保存ボタンから少し離す */
-    font-size: 1.5em; /* アイコンを大きくする */
-    transition: opacity 0.2s;
+    margin-left: 50px; /* 100px から 50px に変更して、ボタン群に近づける */
+    font-size: 1.5em; 
+    transition: opacity 0.2s, color 0.2s; 
 }
 
 .btn-delete-icon:hover {
-    opacity: 0.8;
-}
-
-.fa-trash-alt {
-    color: inherit; /* 親要素の赤色を継承 */
+    opacity: 1.0; /* 透明度を維持 */
+    color: #a00000; /* ホバーでより濃い赤に */
 }
 
 /* -------------------- エラーメッセージ -------------------- */
