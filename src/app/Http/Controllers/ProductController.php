@@ -9,6 +9,7 @@ use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log; // ★ Logファサードを明示的にインポート
 
 class ProductController extends Controller
 {
@@ -103,7 +104,7 @@ class ProductController extends Controller
                 ->with('success', '商品が正常に登録されました。');
         } catch (\Exception $e) {
             DB::rollBack();
-            // ログ出力など適切なエラー処理
+            Log::error('商品登録エラー: ' . $e->getMessage()); // ★ ログを追加
             return back()->withInput()->withErrors(['db_error' => '商品の登録中にエラーが発生しました。']);
         }
     }
@@ -115,11 +116,18 @@ class ProductController extends Controller
     {
         // FN005: 商品データを取得
         $product = Product::with('seasons')->findOrFail($productId);
-        return view('products.show', compact('product'));
+
+        // show.blade.phpが詳細・更新のUIを兼ねるため、季節の選択肢を渡す
+        $seasons = Season::all();
+        // 現在の商品に紐づく季節IDの配列を作成（ラジオボタンの選択状態に必要）
+        $productSeasonIds = $product->seasons->pluck('id')->toArray();
+
+        // 既存のview名が'products.show'であることを確認
+        return view('products.show', compact('product', 'seasons', 'productSeasonIds'));
     }
 
     /**
-     * PG03: 商品更新画面を表示します。
+     * PG03: 商品更新画面を表示します。(★ 今回の要件ではshowが兼ねる可能性あり。このメソッドは未使用のまま維持。)
      */
     public function edit(string $productId)
     {
@@ -130,16 +138,21 @@ class ProductController extends Controller
         // 現在の商品に紐づく季節IDの配列を作成
         $productSeasonIds = $product->seasons->pluck('id')->toArray();
 
+        // 既存のビュー名が'products.update'の場合
         return view('products.update', compact('product', 'seasons', 'productSeasonIds'));
     }
 
     /**
      * FN0013: 商品の変更を保存します。
      * ★引数をRequestからProductUpdateRequestに変更
+     * * @param  \App\Http\Requests\ProductUpdateRequest  $request
+     * @param  string $productId
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ProductUpdateRequest $request, string $productId)
     {
         $product = Product::findOrFail($productId);
+        // FormRequestが自動でバリデーションを行う
         $validated = $request->validated();
 
         DB::beginTransaction();
@@ -153,9 +166,7 @@ class ProductController extends Controller
             // FN0017: 新しい画像がアップロードされた場合のみ処理
             if ($request->hasFile('image')) {
                 // 古い画像を削除
-                if ($product->image) {
-                    // 古い画像がダミーではない（products/から始まる）ことを確認してから削除する方がより安全ですが、
-                    // 現状のダミー画像は 'banana.png' のようなファイル名なので、Storage::delete()では削除対象外になるため問題ありません。
+                if ($product->image && Storage::disk('public')->exists($product->image)) {
                     Storage::disk('public')->delete($product->image);
                 }
                 // 新しい画像を保存
@@ -166,7 +177,8 @@ class ProductController extends Controller
             $product->update($updateData);
 
             // 季節の関連付けを更新 (FN0016)
-            $product->seasons()->sync($validated['seasons']);
+            // ★ Form Requestで'season_id'を使う前提で、こちらでは'seasons'ではなく'season_id'を参照
+            $product->seasons()->sync([$validated['season_id']]);
 
             DB::commit();
 
@@ -175,12 +187,15 @@ class ProductController extends Controller
                 ->with('success', '商品情報が正常に更新されました。');
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error('商品更新エラー: ' . $e->getMessage()); // ★ ログを追加
             return back()->withInput()->withErrors(['db_error' => '商品の更新中にエラーが発生しました。']);
         }
     }
 
     /**
      * FN0018: 商品を削除します。
+     * * @param  string $productId
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(string $productId)
     {
@@ -189,9 +204,7 @@ class ProductController extends Controller
         DB::beginTransaction();
         try {
             // 画像ファイルの削除
-            if ($product->image) {
-                // ダミー画像ではない場合のみ、ストレージから削除
-                // ダミー画像が 'products/' パスを含まないため、この削除処理は安全です。
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
                 Storage::disk('public')->delete($product->image);
             }
 
@@ -208,6 +221,7 @@ class ProductController extends Controller
                 ->with('success', '商品が正常に削除されました。');
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error('商品削除エラー: ' . $e->getMessage()); // ★ ログを追加
             return back()->withErrors(['db_error' => '商品の削除中にエラーが発生しました。']);
         }
     }

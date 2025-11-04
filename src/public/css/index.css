@@ -61,7 +61,7 @@
     flex-direction: column; 
     width: 100%;
     margin-bottom: 0;
-    /* 検索インプットのラッパーの角丸は不要 */
+    
 }
 .sort-select-group {
     display: flex;
@@ -70,7 +70,7 @@
     margin-bottom: 20px; 
 }
 
-/* ★★★ 修正箇所: 検索窓のスタイルを分離し、丸型を維持 ★★★ */
+/* 検索窓のスタイル */
 .search-input-group input[type="text"] {
     width: 100%; 
     padding: 12px 20px; 
@@ -80,7 +80,7 @@
     margin-bottom: 0; 
 }
 
-/* ★★★ 修正箇所: セレクトボックスのスタイルを分離し、標準の角丸に戻す ★★★ */
+/* セレクトボックスのスタイル */
 .sort-select-group select {
     width: 100%; 
     padding: 12px 20px; 
@@ -173,7 +173,7 @@
 .product-card h3.product-name {
     margin: 0;
     font-size: 13px; 
-    font-weight: normal;
+    font-weight: bold;
     color: #333; 
     white-space: nowrap; 
     overflow: hidden;
@@ -184,7 +184,7 @@
     margin: 0;
     font-size: 15px; 
     font-weight: bold;
-    color: #c0392b; 
+    color: #333; 
     flex-shrink: 0;
 }
 
