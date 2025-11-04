@@ -11,25 +11,21 @@
     box-sizing: border-box;
 }
 
-/* フォームタイトル (元のコードを維持) */
+/* フォームタイトル */
 .form-title {
     text-align: left;
-    font-size: 1.5em; 
+    font-size: 1.5em;
     font-weight: bold;
-    margin-bottom: 25px; 
+    margin-bottom: 25px;
     color: #333;
     padding-left: 0;
 }
 
-/* ---------------------------------------------------- */
-/* フォーム要素のスタイル (元のコードを維持) */
-/* ---------------------------------------------------- */
-
-/* 1. フォームグループの背景と枠線を削除 (元のコードを維持) */
+/* フォーム要素のスタイル */
 .form-group {
     margin-bottom: 30px;
-    padding: 0; 
-    border: none; 
+    padding: 0;
+    border: none;
     background-color: transparent;
 }
 
@@ -39,11 +35,11 @@
     font-weight: bold;
     color: #333;
     display: flex;
-    align-items: center; 
+    align-items: center;
 }
 
-/* ★★★ 修正箇所：input[type="file"] を除外する ★★★ */
-/* テキスト、数値、テキストエリアの入力フィールド（枠線が必要なもの） */
+
+/* テキスト、数値、テキストエリアの入力フィールド */
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group textarea {
@@ -57,7 +53,6 @@
     background-color: white; 
     transition: border-color 0.2s;
 }
-/* ★★★ 修正箇所はここまで ★★★ */
 
 
 .form-group input[type="text"]:focus,
@@ -67,7 +62,6 @@
     outline: none;
 }
 
-/* input[type="file"] には、テキスト入力欄の枠線が適用されないため、特別なCSSは不要 */
 
 
 /* テキストエリア */
@@ -76,19 +70,17 @@
     min-height: 120px;
 }
 
-/* ---------------------------------------------------- */
 /* 必須マーク (元のコードを維持) */
-/* ---------------------------------------------------- */
 
 .required-badge {
-    background-color: #dc3545; 
+    background-color: #dc3545;
     color: white;
     font-size: 0.75em;
-    font-weight: normal; 
+    font-weight: normal;
     padding: 3px 6px;
     border-radius: 3px;
     margin-left: 8px;
-    white-space: nowrap; 
+    white-space: nowrap;
     vertical-align: middle;
 }
 
@@ -160,9 +152,7 @@
 }
 
 
-/* ---------------------------------------------------- */
-/* ボタン (中央揃えの横並び) (元のコードを維持) */
-/* ---------------------------------------------------- */
+/*  ボタン　*/
 
 .button-group-center {
     display: flex;
@@ -194,9 +184,9 @@
     background-color: #e0a800;
 }
 
-/* サブボタン (戻る) - 白/グレー */
+/* ボタン (戻る)  */
 .btn-secondary {
-    background-color: #f8f9fa; 
+    background-color: #cdcfd2eb; 
     color: #333;
     border-color: #ccc;
 }
@@ -206,9 +196,7 @@
 }
 
 
-/* ---------------------------------------------------- */
-/* エラーメッセージ (元のコードを維持) */
-/* ---------------------------------------------------- */
+/* エラーメッセージ */
 
 .error-message {
     color: #dc3545; 

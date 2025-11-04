@@ -15,8 +15,7 @@
 
             {{-- 1. 検索フォーム (FN002) --}}
             <form action="{{ route('products.index') }}" method="GET" class="search-input-group">
-                {{-- 検索窓は丸いデザインを維持するため、このグループ内のinput[type="text"]にCSSを適用します --}}
-                <input type="text" name="keyword" id="keyword" placeholder="商品名を入力" value="{{ request('keyword') }}">
+                <input type="text" name="keyword" id="keyword" placeholder="商品名で検索" value="{{ request('keyword') }}">
                 
                 {{-- 検索ボタンのためのhiddenフィールド --}}
                 @if(request('sort'))
