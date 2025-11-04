@@ -37,7 +37,7 @@ class ProductUpdateRequest extends FormRequest
             'description' => ['required', 'string', 'max:120'],
 
             // 画像: 必須ではない（既に画像があるため）。ファイルが選択された場合のみバリデーションを行う。
-            'image' => ['nullable', 'file', 'mimes:jpeg,png'],
+            'image' => ['required','nullable', 'file', 'mimes:jpeg,png'],
         ];
     }
 
@@ -61,6 +61,7 @@ class ProductUpdateRequest extends FormRequest
             'description.max' => '120文字以内で入力してください',
 
             // 画像 (requiredはnullableによりチェック不要)
+            'image.required' => '画像を登録してください',
             'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
         ];
     }

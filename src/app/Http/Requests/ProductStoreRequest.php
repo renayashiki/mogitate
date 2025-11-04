@@ -35,14 +35,14 @@ class ProductStoreRequest extends FormRequest
             'image' => [
                 'required',
                 'image',
-                'mimes:png,jpeg', // 拡張子をpngとjpegに限定
-                'max:2048'     // 2MB (2048KB) を上限とする
+                'mimes:png,jpeg',
+                'max:2048'
             ],
 
             // 季節は必須、配列形式で、かつDBに存在するIDであること
             'seasons' => 'required|array|exists:seasons,id',
 
-            // a. 必須かつ d. 入力文字数は120文字以内
+            // 入力文字数は120文字以内
             'description' => 'required|string|max:120',
         ];
     }
@@ -60,21 +60,21 @@ class ProductStoreRequest extends FormRequest
 
             // 値段
             'price.required' => '値段を入力してください',
-            'price.numeric' => '値段は数値で入力してください', 
+            'price.numeric' => '値段は数値で入力してください',
             'price.min' => '値段は0円以上にしてください',
-            'price.max' => '値段は10000円以内で入力してください', 
+            'price.max' => '値段は10000円以内で入力してください',
 
             // 画像
             'image.required' => '画像を登録してください',
-            'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください', 
-            'image.max' => 'ファイルサイズは2MB以内の画像を選択してください', // 例外として維持
+            'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
+            'image.max' => 'ファイルサイズは2MB以内の画像を選択してください', // サーバーエラー表示出るため、エラー表示維持
 
             // 季節
             'seasons.required' => '季節を選択してください',
 
             // 商品説明
             'description.required' => '商品説明を入力してください',
-            'description.max' => '商品説明の入力文字数は120文字以内で入力してください',
+            'description.max' => '120文字以内で入力してください',
         ];
     }
 }
