@@ -21,6 +21,9 @@ Route::post('/products/register', [ProductController::class, 'store'])->name('pr
 // 商品詳細画面 (PG02/FN005)
 Route::get('/products/detail/{productId}', [ProductController::class, 'show'])->name('products.show');
 
+// 検索機能のルーティング
+Route::get('/products/search', [ProductController::class, 'index'])->name('products.search');
+
 // 商品更新画面表示 (PG03)
 Route::get('/products/{productId}/update', [ProductController::class, 'edit'])->name('products.edit');
 // 商品情報変更機能 (FN0013)

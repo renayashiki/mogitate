@@ -14,7 +14,8 @@
             <h2 class="sidebar-title">商品一覧</h2> 
 
             {{-- 1. 検索フォーム (FN002) --}}
-            <form action="{{ route('products.index') }}" method="GET" class="search-input-group">
+            <form action="{{ route('products.search') }}" method="GET" class="search-input-group">
+
                 <input type="text" name="keyword" id="keyword" placeholder="商品名で検索" value="{{ request('keyword') }}">
 
                 {{-- 検索ボタンのためのhiddenフィールド --}}
@@ -28,15 +29,15 @@
 
             {{-- 2. 並び替え機能 (FN003) --}}
             <div class="divider"></div>
-            <form action="{{ route('products.index') }}" method="GET" class="sort-select-group">
+            <form action="{{ route('products.search') }}" method="GET" class="sort-select-group">
                 <label for="sort">価格順で表示</label>
-                {{-- セレクトボックスは角丸デザインに戻すため、CSSの指定を分離します --}}
-                <select name="sort" id="sort" onchange="this.form.submit()"> 
+                <select name="sort" id="sort" onchange="this.form.submit()">
+
                     <option value="" disabled {{ !request('sort') ? 'selected' : '' }}>価格で並び替え</option>
                     <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>高い順に表示</option>
                     <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>低い順に表示</option>
                 </select>
-                {{-- 並び替えのためのhiddenフィールド（検索キーワードを維持） --}}
+                {{-- 並び替えのためのhiddenフィールド--}}
                 @if(request('keyword'))
                     <input type="hidden" name="keyword" value="{{ request('keyword') }}">
                 @endif
@@ -45,7 +46,6 @@
             {{-- 適用中のソートフィルタボタンのロジック --}}
             @if (!empty($currentSortKey))
                 @php
-                    // 表示文言の決定（ご要望に応じて修正）
                     $label_prefix = '';
                     if ($currentSortKey === 'price_desc') {
                         // 価格が高い順の場合
@@ -62,7 +62,7 @@
                     // 'sort' パラメータを削除
                     unset($currentQueries['sort']);
                     // 新しいURL（フィルタ解除URL）を生成
-                    $resetUrl = route('products.index', $currentQueries);
+                    $resetUrl = route('products.search', $currentQueries);
                 @endphp
 
                 @if(!empty($label_prefix))
