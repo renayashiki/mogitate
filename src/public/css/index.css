@@ -1,4 +1,4 @@
-/* -------------------- 共通要素・レイアウトスタイル -------------------- */
+/* 共通要素・レイアウトスタイル*/
 .btn-base {
     padding: 10px 20px;
     border: none;
@@ -84,9 +84,9 @@
     width: 100%;
     padding: 12px 20px;
     border: 1px solid #ccc;
-    border-radius: 4px; /* 標準の角丸 (4px) を適用 */
+    border-radius: 4px;
     box-sizing: border-box;
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 
 .sidebar label {
@@ -96,115 +96,115 @@
     margin-bottom: 8px;
 }
 .divider {
-    margin: 0; 
+    margin: 0;
 }
 .content-area {
-    flex-grow: 1; 
-    width: auto; 
-    max-width: none; 
-    height: auto; 
+    flex-grow: 1;
+    width: auto;
+    max-width: none;
+    height: auto;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     min-width: 0;
 }
 .main-product-header {
     display: flex;
-    justify-content: flex-end; 
+    justify-content: flex-end;
     align-items: center;
-    margin-bottom: 20px; 
-    flex-shrink: 0; 
+    margin-bottom: 20px;
+    flex-shrink: 0;
 }
 .product-content-wrapper {
     display: flex;
     flex-direction: column;
-    flex-grow: 1; 
-    overflow-y: visible; 
-    padding-right: 0; 
-    height: auto; 
-    max-height: none; 
+    flex-grow: 1;
+    overflow-y: visible;
+    padding-right: 0;
+    height: auto;
+    max-height: none;
 }
 .product-card-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 15px; 
-    grid-template-rows: auto; 
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    grid-template-rows: auto;
     flex-shrink: 0;
-    margin-bottom: 10px; 
-    height: auto; 
+    margin-bottom: 10px;
+    height: auto;
 }
 .product-card {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     text-decoration: none;
     color: #333;
     background-color: #fff;
-    border-radius: 6px; 
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
-    border: 1px solid #eee; 
-    overflow: hidden; 
-    height: 100%; 
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+    overflow: hidden;
+    height: 100%;
 }
 .product-card > div:first-child {
-    aspect-ratio: 1 / 1; 
+    aspect-ratio: 1 / 1;
     position: relative;
     width: 100%;
     overflow: hidden;
-    flex-shrink: 0; 
+    flex-shrink: 0;
 }
 .product-card img {
     width: 100%;
-    height: 100%; 
-    object-fit: cover; 
+    height: 100%;
+    object-fit: cover;
     display: block;
-    border-top-left-radius: 6px; 
+    border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    flex-shrink: 0; 
+    flex-shrink: 0;
 }
 .product-info-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 10px; 
-    flex-shrink: 0; 
-    min-height: 30px; 
+    padding: 8px 10px;
+    flex-shrink: 0;
+    min-height: 30px;
     border-top: 1px solid #f0f0f0; 
 }
 .product-card h3.product-name {
     margin: 0;
-    font-size: 13px; 
+    font-size: 13px;
     font-weight: bold;
-    color: #333; 
-    white-space: nowrap; 
+    color: #333;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 60%; 
+    max-width: 60%;
 }
 .product-card p.price {
     margin: 0;
-    font-size: 15px; 
+    font-size: 15px;
     font-weight: bold;
-    color: #333; 
+    color: #333;
     flex-shrink: 0;
 }
 
 
-/* -------------------- ページネーション -------------------- */
+/*ページネーション*/
 
 .pagination-links {
     margin-top: 30px;
     padding-bottom: 30px;
     flex-shrink: 0;
     display: flex;
-    justify-content: center; /* コンテナを中央寄せ */
+    justify-content: center;
     width: 100%;
 }
 
-/* 1. 【 Showing... テキストの絶対非表示 】 */
+/*Showing... テキストの非表示*/
 .pagination-links nav > div > div:first-child {
     display: none !important; 
 }
 
-/* 2. ページネーションのリンクグループを確実に中央に配置 */
+/*ページネーションのリンクグループを確実に中央に配置 */
 .pagination-links nav > div > div:last-child {
     display: flex;
     justify-content: center;
@@ -212,80 +212,79 @@
     padding: 0;
 }
 
-/* 3. 無効なPrev/Nextリンクを完全に非表示にする */
+/*無効なPrev/Nextリンクを完全に非表示にする */
 .pagination-links span.relative:not([aria-current="page"]) {
-    display: none !important; 
+    display: none !important;
 }
 
-/* 4. すべてのリンク (a) とアクティブなページ (span) に丸ボタンの共通スタイルを適用 */
+/*丸ボタンの共通スタイルを適用 */
 .pagination-links a,
 .pagination-links span[aria-current="page"] {
-    width: 40px; 
-    height: 40px; 
-    border-radius: 50%; /* 丸形 */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     font-size: 14px;
     font-weight: normal;
-    
+
     /* 共通の外観 */
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 5px;
-    text-decoration: none; 
+    text-decoration: none;
     box-sizing: border-box;
-    position: relative; 
-    
+    position: relative;
+
     /* 非アクティブな状態のデフォルト */
     background-color: #fff;
     border: 1px solid #ddd;
-    color: #333 !important; /* ページ番号の数字を確実に表示 */
-    
+    color: #333 !important; 
+    /* ページ番号の数字を確実に表示 */
+
     transition: background-color 0.2s, border-color 0.2s;
 }
 
-/* 5. アクティブなページ番号のスタイル */
+/*ページ番号のスタイル */
 .pagination-links span[aria-current="page"] {
     background-color: #ffc107; /* 黄色い背景 */
     font-weight: bold;
     border-color: #ffc107;
 }
 
-/* 6. ホバーエフェクト */
+/*ホバーエフェクト */
 .pagination-links a:hover {
-    background-color: #ffe082; /* 薄い黄色 */
+    background-color: #ffe082;
     border-color: #ffc107;
 }
 
-/* 7. Prev/Nextリンクのテキストを非表示にする（矢印リンクの文字だけを消す） */
+/*Prev/Nextリンクのテキストを非表示*/
 .pagination-links a[rel="prev"] > span,
 .pagination-links a[rel="next"] > span {
     color: transparent !important;
 }
 
-/* 8. 矢印アイコン（SVG）の調整 */
+/*矢印アイコン（SVG）の調整 */
 .pagination-links a svg {
-    fill: #333; 
-    color: #333; 
+    fill: #333;
+    color: #333;
     width: 16px;
     height: 16px;
-    
-    position: absolute; 
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: block !important; 
+    display: block !important;
 }
 
-/* -------------------- 適用中のフィルタボタンのスタイル -------------------- */
 
 /* 適用中のフィルタボタンのラッパー */
 .current-filter-group {
-    margin-top: 15px; /* 並び替えフォームと適度な間隔を空ける */
+    margin-top: 15px;
     padding-top: 10px;
-    border-top: 1px solid #eee; /* 区切り線 */
+    border-top: 1px solid #dbd7d7e9;
 }
 
-/* 適用中のフィルタ（黄色いボタン）のスタイル */
+/* 適用中の（黄色いボタン）のスタイル */
 .btn-filter-applied {
     display: inline-flex;
     align-items: center;
@@ -303,16 +302,16 @@
 }
 
 .btn-filter-applied:hover {
-    background-color: #FFD700; /* ホバーで少し濃く */
+    background-color: #FFD700;
 }
 
 /* 削除アイコンのスタイル */
 .filter-close-icon {
     margin-left: 8px;
-    font-size: 16px; /* アイコンサイズ */
-    color: #333; /* ✖️を黒（濃い色）に変更 */
+    font-size: 16px;
+    color: #333;
 }
 
 .btn-filter-applied:hover .filter-close-icon {
-    color: #111; /* ホバーでアイコンの色をさらに濃く */
+    color: #111;
 }

@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-{{-- 共通CSSと合わせて、このページ固有のCSSを読み込む --}}
 @section('page_styles')
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 @endsection
@@ -8,12 +7,12 @@
 {{-- メインコンテンツラッパー --}}
 @section('content')
     <div class="main-content-wrapper">
-        
-        {{-- サイドバー (変更なし) --}}
-        <aside class="sidebar">
-            <h2 class="sidebar-title">商品一覧</h2> 
 
-            {{-- 1. 検索フォーム (FN002) --}}
+        {{-- サイドバー --}}
+        <aside class="sidebar">
+            <h2 class="sidebar-title">商品一覧</h2>
+
+            {{-- 検索フォーム--}}
             <form action="{{ route('products.search') }}" method="GET" class="search-input-group">
 
                 <input type="text" name="keyword" id="keyword" placeholder="商品名で検索" value="{{ request('keyword') }}">
@@ -22,12 +21,12 @@
                 @if(request('sort'))
                     <input type="hidden" name="sort" value="{{ request('sort') }}">
                 @endif
-                
+
                 {{-- 黄色い検索ボタン --}}
                 <button type="submit" class="btn-base btn-search-yellow">検索</button>
             </form>
 
-            {{-- 2. 並び替え機能 (FN003) --}}
+            {{-- 並び替え機能  --}}
             <div class="divider"></div>
             <form action="{{ route('products.search') }}" method="GET" class="sort-select-group">
                 <label for="sort">価格順で表示</label>
@@ -37,13 +36,14 @@
                     <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>高い順に表示</option>
                     <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>低い順に表示</option>
                 </select>
+
                 {{-- 並び替えのためのhiddenフィールド--}}
                 @if(request('keyword'))
                     <input type="hidden" name="keyword" value="{{ request('keyword') }}">
                 @endif
             </form>
 
-            {{-- 適用中のソートフィルタボタンのロジック --}}
+            {{-- 適用中のソートフィルタボタン--}}
             @if (!empty($currentSortKey))
                 @php
                     $label_prefix = '';
@@ -54,10 +54,10 @@
                         // 価格が低い順の場合
                         $label_prefix = '低い順に表示';
                     }
-                    
+
                     // ユーザーに消せることをアピールする「×」を追記
                     $label = $label_prefix . ' ×';
-                    
+
                     $currentQueries = request()->query();
                     // 'sort' パラメータを削除
                     unset($currentQueries['sort']);
@@ -70,10 +70,10 @@
                         <a href="{{ $resetUrl }}" 
                             class="btn-base btn-filter-applied" 
                             title="クリックして並び替えを解除">
-                            
+
                             {{-- 修正後の表示ラベル（「×」を含む） --}}
                             {{ $label }}
-                            
+
                             {{-- 削除アイコン (Font Awesome) --}}
                             <i class="fas fa-times-circle filter-close-icon"></i>
                         </a>
@@ -85,15 +85,15 @@
 
         {{-- メインコンテンツエリア --}}
         <main class="content-area">
-            <div class="container"> 
-                
+            <div class="container">
+
                 {{-- 「商品を追加」ボタン --}}
                 <div class="main-product-header">
                     <a href="{{ route('products.create') }}" class="btn-base btn-primary btn-add-product">
                         <i class="fas fa-plus mr-2"></i> +商品を追加
                     </a>
                 </div>
-                
+
                 <div class="product-content-wrapper">
                     @if(request('keyword') || request('sort'))
                         <p class="result-count">{{ $products->total() }}件の商品が見つかりました。</p>
@@ -104,7 +104,7 @@
                         @forelse ($products as $product)
                             <a href="{{ route('products.show', ['productId' => $product->id]) }}" class="product-card">
                                 <div>
-                                    {{-- ★★★ 画像パスのロジック ★★★ --}}
+                                    {{--画像パスのロジック--}}
                                     @php
                                         // 1. アップロード画像（本番用）のパスを構築
                                         $uploadedImagePath = asset('storage/' . $product->image);
@@ -129,7 +129,7 @@
                         @endforelse
                     </div>
 
-                    {{-- ページネーション (FN006) --}}
+                    {{-- ページネーション  --}}
                     <div class="pagination-links">
                         {{ $products->appends(['keyword' => request('keyword'), 'sort' => request('sort')])->links() }}
                     </div>

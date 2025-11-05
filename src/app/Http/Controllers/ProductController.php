@@ -9,40 +9,37 @@ use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log; // ★ Logファサードを明示的にインポート
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
-    /**
-     * PG01: 商品一覧画面とPG05: 検索結果一覧画面を表示します。
+    /* 商品一覧画面と検索結果一覧画面
      */
     public function index(Request $request)
     {
         $query = Product::with('seasons');
 
-        // FN002: 商品名検索
+        // 商品名検索
         if ($request->filled('keyword')) {
             $query->where('name', 'LIKE', "%{$request->keyword}%");
         }
 
-        // FN003: 並び替え
+        //並び替え
         $sort = $request->input('sort');
         if ($sort === 'price_desc') {
             $query->orderBy('price', 'desc');
         } elseif ($sort === 'price_asc') {
             $query->orderBy('price', 'asc');
         } else {
-            // デフォルトはID順（新しいものが上）
             $query->orderBy('id', 'desc');
         }
 
-        // FN006: ページネーション（1ページあたり6件）
+        //ページネーション（1ページあたり6件）
         $products = $query->paginate(6);
 
-        // 検索結果画面 (PG05) のURLを生成するために、検索・ソートパラメータを付加
+        // 検索結果画面
         $products->appends($request->only(['keyword', 'sort']));
 
-        // ★★★ 修正箇所: getCurrentSortLabelのロジックをここに直接組み込みます ★★★
 
         $currentSortKey = $sort;
         $currentSortLabel = null;
@@ -61,9 +58,7 @@ class ProductController extends Controller
         return view('products.index', compact('products', 'currentSortKey', 'currentSortLabel'));
     }
 
-    /**
-     * PG04: 商品登録画面を表示します。
-     */
+    /*商品登録画面を表示*/
     public function create()
     {
         // FN007: 季節の選択肢を取得
@@ -71,17 +66,14 @@ class ProductController extends Controller
         return view('products.register', compact('seasons'));
     }
 
-    /**
-     * FN008: 商品をデータベースに登録します。
-     * ★引数をRequestからProductStoreRequestに変更
-     */
+    /*商品をデータベースに登録*/
     public function store(ProductStoreRequest $request)
     {
         $validated = $request->validated();
 
         DB::beginTransaction();
         try {
-            // 画像の保存 (FN0010)
+            // 画像の保存
             $imagePath = $request->file('image')->store('products', 'public');
 
             // 商品の登録
@@ -89,69 +81,58 @@ class ProductController extends Controller
                 'name' => $validated['name'],
                 'price' => $validated['price'],
                 'description' => $validated['description'],
-                // storage/products/ファイル名 の形式で保存
+                // storage/products/ファイル名の形式で保存
                 'image' => $imagePath,
             ]);
 
-            // 季節の関連付け (FN0012)
+            // 季節の関連付け
             $product->seasons()->attach($validated['seasons']);
 
             DB::commit();
 
-            // FN009: 詳細画面にリダイレクト
+            //詳細画面にリダイレクト
             return redirect()->route('products.index')
                 ->with('success', '商品が正常に登録されました。');
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('商品登録エラー: ' . $e->getMessage()); // ★ ログを追加
+            Log::error('商品登録エラー: ' . $e->getMessage());
             return back()->withInput()->withErrors(['db_error' => '商品の登録中にエラーが発生しました。']);
         }
     }
 
-    /**
-     * PG02: 商品詳細画面を表示します。
-     */
+    /*商品詳細画面を表示*/
     public function show(string $productId)
     {
-        // FN005: 商品データを取得
+        //商品データを取得
         $product = Product::with('seasons')->findOrFail($productId);
 
-        // show.blade.phpが詳細・更新のUIを兼ねるため、季節の選択肢を渡す
+        //季節の選択肢を渡す
         $seasons = Season::all();
-        // 現在の商品に紐づく季節IDの配列を作成（ラジオボタンの選択状態に必要）
+        // 現在の商品に紐づく季節IDの配列を作成
         $productSeasonIds = $product->seasons->pluck('id')->toArray();
 
-        // 既存のview名が'products.show'であることを確認
         return view('products.show', compact('product', 'seasons', 'productSeasonIds'));
     }
 
-    /**
-     * PG03: 商品更新画面を表示します。(★ 今回の要件ではshowが兼ねる可能性あり。このメソッドは未使用のまま維持。)
-     */
+    /*商品更新画面を表示*/
     public function edit(string $productId)
     {
-        // FN0013: 既存商品データを取得
+        //既存商品データを取得
         $product = Product::with('seasons')->findOrFail($productId);
-        $seasons = Season::all(); // FN0016: 季節の選択肢
+        $seasons = Season::all();
 
         // 現在の商品に紐づく季節IDの配列を作成
         $productSeasonIds = $product->seasons->pluck('id')->toArray();
 
-        // 既存のビュー名が'products.update'の場合
+
         return view('products.update', compact('product', 'seasons', 'productSeasonIds'));
     }
 
-    /**
-     * FN0013: 商品の変更を保存します。
-     * ★引数をRequestからProductUpdateRequestに変更
-     * * @param  \App\Http\Requests\ProductUpdateRequest  $request
-     * @param  string $productId
-     * @return \Illuminate\Http\RedirectResponse
-     */
+    /**商品の変更を保存**/
     public function update(ProductUpdateRequest $request, string $productId)
     {
         $product = Product::findOrFail($productId);
-        // FormRequestが自動でバリデーションを行う
+
         $validated = $request->validated();
 
         DB::beginTransaction();
@@ -162,7 +143,7 @@ class ProductController extends Controller
                 'description' => $validated['description'],
             ];
 
-            // FN0017: 新しい画像がアップロードされた場合のみ処理
+            //新しい画像がアップロードされた場合のみ処理
             if ($request->hasFile('image')) {
                 // 古い画像を削除
                 if ($product->image && Storage::disk('public')->exists($product->image)) {
@@ -189,11 +170,7 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * FN0018: 商品を削除します。
-     * * @param  string $productId
-     * @return \Illuminate\Http\RedirectResponse
-     */
+    /*商品を削除*/
     public function destroy(string $productId)
     {
         $product = Product::findOrFail($productId);
@@ -213,12 +190,12 @@ class ProductController extends Controller
 
             DB::commit();
 
-            // FN0019: 一覧画面にリダイレクト
+            // 一覧画面にリダイレクト
             return redirect()->route('products.index')
                 ->with('success', '商品が正常に削除されました。');
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('商品削除エラー: ' . $e->getMessage()); // ★ ログを追加
+            Log::error('商品削除エラー: ' . $e->getMessage());
             return back()->withErrors(['db_error' => '商品の削除中にエラーが発生しました。']);
         }
     }

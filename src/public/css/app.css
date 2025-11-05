@@ -1,20 +1,16 @@
 /*
-|--------------------------------------------------------------------------
-| アプリケーション共通スタイル (app.css)
-|--------------------------------------------------------------------------
-|
-| 共通のボディ設定、背景色、および共通ヘッダーのスタイルのみを定義します。
-|
+共通のボディ設定、背景色、および共通ヘッダーのスタイル
 */
 body {
     font-family: 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
-    background-color: #f7f7f7; /* 明るいグレーの背景 */
+    background-color: #f7f7f7;
     color: #333;
     margin: 0;
     padding: 0;
     line-height: 1.6;
     height: 100vh;
-    overflow-x: hidden; /* 横スクロールを禁止 */
+    overflow-x: hidden;
+    /* 横スクロールを禁止 */
 }
 
 #app {
@@ -23,29 +19,28 @@ body {
     flex-direction: column;
 }
 
-/* -------------------- 共通ヘッダー -------------------- */
+/* 共通ヘッダー */
 .global-header {
-    background-color: #fff; 
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04); 
-    flex-shrink: 0; 
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    flex-shrink: 0;
 }
 
 .header-content {
-    max-width: 1400px; 
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 10px ; 
-    display: flex; 
+    padding: 10px ;
+    display: flex;
     align-items: center;
 }
 
 .app-logo {
-    font-size: 35px; 
-    font-weight: 700; 
-    color: #ffc107; 
-    font-family: "Lobster Two", sans-serif; 
+    font-size: 35px;
+    font-weight: 700;
+    color: #ffc107;
+    font-family: "Lobster Two", sans-serif;
     text-decoration: none;
     display: inline-block;
-    /* ロゴ自体に左パディング 40px を入れることで、サイドバーと開始位置を揃え、左端に寄せる */
     text-align: left;
     margin-right: 15px; 
 }

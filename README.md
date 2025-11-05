@@ -43,7 +43,7 @@ $ code .
 $ docker-compose exec php bash
 
 (PHPコンテナ内で)
-# composer install 
+# composer install
 
 ```
 
@@ -113,6 +113,7 @@ DB_PORT=3306
 
 - 商品登録画面: [http://localhost/products/register](http://localhost/products/register)
 
+- 商品詳細画面: [http://localhost/products/detail/{:productId}](http://localhost/products/detail/{:productId})
 
 
 ## 使用技術(環境実行)

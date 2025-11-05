@@ -15,7 +15,7 @@ class Season extends Model
     ];
 
     /**
-     * この季節に属する商品を取得します。（多対多リレーション）
+     * この季節に属する商品を取得（多対多リレーション）
      */
     public function products(): BelongsToMany
     {

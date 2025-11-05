@@ -18,11 +18,11 @@ class Product extends Model
     ];
 
     /**
-     * 商品が属する季節を取得します。（多対多リレーション）
+     * 商品が属する季節を（多対多リレーション）
      */
     public function seasons(): BelongsToMany
     {
-        // 中間テーブル名 'product_season'
+
         return $this->belongsToMany(Season::class);
     }
 }

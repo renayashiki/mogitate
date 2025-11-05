@@ -1,20 +1,20 @@
 .product-detail-form {
-    max-width: 960px; /* 見本の横幅に合わせる */
+    max-width: 960px; 
     margin: 40px auto;
-    padding: 0; /* カード背景をなくすためパディングも除去 */
+    padding: 0; 
 }
 
-/* 2. 商品一覧 > バナナ (商品により変動) */
+/* 商品一覧 > (商品により変動)*/
 .breadcrumb-container {
     max-width: 960px;
-    margin: 0 auto 20px auto; /* フォームの上、中央に配置 */
+    margin: 0 auto 20px auto;
     font-size: 0.95em;
     color: #555;
-    padding-left: 10px; /* 見本に合わせて少し左に寄せる */
+    padding-left: 10px;
 }
 
 .breadcrumb-link {
-    color: #007bff; /* リンク色 */
+    color: #007bff;
     text-decoration: none;
 }
 
@@ -33,56 +33,53 @@
 }
 
 
-/* -------------------- メインコンテンツ (画像と入力フィールド) -------------------- */
+/* メインコンテンツ (画像と入力フィールド)*/
 .form-content-wrapper {
     display: flex;
-    gap: 40px; /* 画像と入力フィールド間のスペース */
-    margin-bottom: 20px; /* 商品説明との間隔 */
-    align-items: flex-start; /* 画像と入力欄の上端を揃える */
+    gap: 40px;
+    margin-bottom: 20px;
+    align-items: flex-start;
 }
 
-/* -------------------- 左側: 画像エリア -------------------- */
+/*画像エリア*/
 .image-area {
-    flex-basis: 35%; /* 見本に合わせて調整 */
+    flex-basis: 35%;
     flex-shrink: 0;
     text-align: center;
 }
 
-/* 4. 商品画像という見出しは不要なので、.section-title は使わない */
 
 .product-image-display {
-    width: 250px; 
+    width: 250px;
     height: 250px;
-    margin: 0 auto 10px; 
+    margin: 0 auto 10px;
     overflow: hidden;
     border-radius: 4px;
     display: block;
-    /* 見本の画像の枠に合わせて調整 */
-    border: 1px solid #ddd; 
+    border: 1px solid #ddd;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .product-actual-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
     display: block;
 }
 
-/* ファイルアップロードボタンのカスタムスタイル */
+/*ファイルアップロードボタンのカスタム*/
 .file-input-group {
-    /* 以前の flex/column/center の設定を削除 */
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 
-/* ★【修正点2】ファイルボタンとファイル名を横並びにする新しいコンテナ */
+/*ファイルボタンとファイル名を横並びにするコンテナ*/
 .file-upload-row {
     display: flex;
-    align-items: center; /* 垂直方向中央揃え */
-    justify-content: center; /* 水平方向中央揃え */
-    gap: 15px; /* ボタンとファイル名の間隔 */
-    margin-top: 10px; /* 画像との間隔 */
-    margin-bottom: 10px; /* エラーメッセージとの間隔 */
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .file-input-hidden {
@@ -93,28 +90,27 @@
     background-color: #ebe7e7e7;
     color: #333;
     border: 1px solid #333;
-    /* 【修正点2】ボタンを小さくするための調整 */
     padding: 5px 5px;
     width: auto;
-    min-width: 120px; 
+    min-width: 120px;
     border-radius: 4px;
     cursor: pointer;
     font-weight: normal;
     transition: background-color 0.2s;
     text-align: center;
-    font-size: 0.9em; 
+    font-size: 0.9em;
 }
 
 .btn-file-label:hover {
     background-color: #eee;
 }
 
-/* ★【修正点2】現在のファイル名表示のスタイル */
+/*ファイル名表示のスタイル */
 .current-filename-display {
     font-size: 0.85em;
     color: #777;
     margin: 0;
-    white-space: nowrap; 
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 120px;
@@ -122,21 +118,19 @@
 }
 
 
-/* -------------------- 右側: 入力フィールドエリア -------------------- */
+/*入力フィールドエリア*/
 .input-fields-area {
-    flex-basis: 65%; /* 残りの幅を占める */
-    /* 5. 商品名・値段・季節を全体的に下にずらして画像の下線のラインに合わせて配置 */
-    /* 画像の高さ(250px) - 画像の上部余白(0) + 下部余白(10) を目安に、全体の配置を調整 */
-    padding-top: 15px; 
+    flex-basis: 65%;
+    padding-top: 15px;
 }
 
 .form-group {
     margin-bottom: 20px;
 }
 
-.input-label { /* labelのフォントスタイルも見本画像に合わせる */
+.input-label {
     display: block;
-    font-weight: normal; /* 太字ではなくする */
+    font-weight: normal;
     color: #333;
     margin-bottom: 5px;
     font-size: 0.95em;
@@ -144,11 +138,11 @@
 
 .text-input {
     width: 100%;
-    padding: 8px 10px; /* 見本に合わせて調整 */
+    padding: 8px 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    font-size: 0.95em; /* 見本に合わせて調整 */
+    font-size: 0.95em;
     transition: border-color 0.2s;
 }
 
@@ -157,16 +151,16 @@
     outline: none;
 }
 
-/* 3. ボタンの〇の中に文字は入れずに、見本通り簡易的なラジオボタンで 〇春 のような形で〇でチェックのON/OFF ができるようにする */
+/* 3. ボタンの〇でチェックのON/OFF ができるように */
 .radio-group-container {
     display: flex;
-    align-items: flex-start; /* ラベルとラジオボタンを上部に揃える */
-    gap: 10px; /* ラベルとラジオボタンのグループの間隔 */
+    align-items: flex-start;
+    gap: 10px;
 }
 
 .radio-group-container .input-label {
-    flex-shrink: 0; /* ラベルが縮まないように */
-    margin-top: 5px; /* ラジオボタンのラインに合わせる */
+    flex-shrink: 0;
+    margin-top: 5px;
 }
 
 .radio-options-wrapper {
@@ -181,14 +175,13 @@
     font-size: 0.95em;
 }
 
-/* ★ 修正: radio, checkboxどちらにも対応できるようにする */
+/*radio, checkboxどちらにも対応できるように*/
 .radio-custom-label input[type="radio"],
-.radio-custom-label input[type="checkbox"] { 
-    display: none; /* 元のボタンを非表示にする */
+.radio-custom-label input[type="checkbox"] {
+    display: none;
 }
 
 .radio-custom-circle {
-    /* 未選択時の外側の丸 */
     width: 16px;
     height: 16px;
     border-radius: 50%;
@@ -199,8 +192,8 @@
     flex-shrink: 0;
 }
 
+/* 選択時の内側のチェックマーク/丸 */
 .radio-custom-circle::after {
-    /* 選択時の内側のチェックマーク/丸 */
     content: '';
     position: absolute;
     top: 50%;
@@ -209,27 +202,27 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: #ffc107; /* チェック時の色 */
+    background-color: #ffc107;
     transition: transform 0.2s;
 }
 
-/* ★ 修正: radio, checkbox どちらがチェックされても丸型が有効になるようにする */
+/*radio, checkbox どちらがチェックされても丸型が有効になるようにする */
 .radio-custom-label input[type="radio"]:checked + .radio-custom-circle,
 .radio-custom-label input[type="checkbox"]:checked + .radio-custom-circle {
-    border-color: #ffc107; /* 選択時の枠線色 */
+    border-color: #ffc107;
 }
 
 .radio-custom-label input[type="radio"]:checked + .radio-custom-circle::after,
 .radio-custom-label input[type="checkbox"]:checked + .radio-custom-circle::after {
-    transform: translate(-50%, -50%) scale(1); /* 選択時、内側の丸を表示 */
+    transform: translate(-50%, -50%) scale(1);/* 選択時の内側のチェックマーク/丸 */
 }
 
 
-/* -------------------- 商品説明エリア -------------------- */
+/*商品説明エリア*/
 .description-area {
-    max-width: 960px; /* 全体のコンテナ幅に合わせる */
-    margin: 0 auto; 
-    padding: 0 10px; /* 左右の余白を少し調整 */
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 10px;
 }
 
 .textarea-input-full {
@@ -249,70 +242,70 @@
 }
 
 
-/* ボタンエリア (下部フッター)  */
+/* ボタンエリア (下部フッター)*/
 .button-group-bottom {
     display: flex;
-    justify-content: center; 
-    gap: 20px; 
+    justify-content: center;
+    gap: 20px;
     margin-top: 40px;
     padding-top: 20px;
 }
 
-/* 【ボタンの見た目を調整】 */
+/* ボタンの見た目を調整*/
 .btn-base {
-    padding: 10px 25px; /* サイズを微調整 */
-    border-radius: 6px; /* 角を少し丸く */
+    padding: 10px 25px;
+    border-radius: 6px;
     cursor: pointer;
     text-decoration: none;
-    font-weight: 700; /* 太字を明確に指定 */
+    font-weight: 700;
     text-align: center;
     transition: background-color 0.2s, box-shadow 0.2s;
     border: none;
 }
 
-/* ボタン (戻る) - よりクリーンで分かりやすいデザインに調整 */
+/* ボタン (戻る)*/
 .btn-secondary {
-    background-color: #f0f0f0; 
+    background-color: #f0f0f0;
     color: #333;
-    border: 1px solid #ccc; /* 枠線を追加 */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* 影を追加 */
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .btn-secondary:hover {
-    background-color: #e0e0e0; /* ホバーで少し濃く */
+    background-color: #e0e0e0;
     color: #333;
 }
 
-/* ボタン (変更を保存) - メインカラーの強調と影の調整 */
+/* ボタン (変更を保存)*/
 .btn-primary-update {
     background-color: #ffc107;
     color: #333;
-    box-shadow: 0 4px 6px rgba(255, 193, 7, 0.3), 0 1px 3px rgba(0, 0, 0, 0.08); /* 黄色を強調した影 */
+    box-shadow: 0 4px 6px rgba(255, 193, 7, 0.3), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .btn-primary-update:hover {
     background-color: #ffdb58;
-    box-shadow: 0 6px 8px rgba(255, 193, 7, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1); /* ホバーで影を強調 */
+    box-shadow: 0 6px 8px rgba(255, 193, 7, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 7. 削除ボタン (ゴミ箱アイコン) - 配置とホバー時の見た目を調整 */
+/* 7. 削除ボタン (ゴミ箱アイコン)*/
 .btn-delete-icon {
     background: none;
     border: none;
-    color: #dc3545; /* 赤色 */
+    color: #dc3545;
     cursor: pointer;
     padding: 0;
-    margin-left: 50px; /* 100px から 50px に変更して、ボタン群に近づける */
-    font-size: 1.5em; 
-    transition: opacity 0.2s, color 0.2s; 
+    margin-left: 50px;
+    font-size: 1.5em;
+    transition: opacity 0.2s, color 0.2s;
 }
 
 .btn-delete-icon:hover {
-    opacity: 1.0; /* 透明度を維持 */
-    color: #a00000; /* ホバーでより濃い赤に */
+    opacity: 1.0;
+    color: #a00000;
 }
 
-/* -------------------- エラーメッセージ -------------------- */
+/*エラーメッセージ*/
 .error-message {
     color: #dc3545;
     font-size: 0.9em;

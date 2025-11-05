@@ -24,14 +24,14 @@ class ProductStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            // a. 全ての項目が入力必須
+            // 商品名入力必須
             'name' => 'required|string|max:255',
 
-            // b. 値段は数値、0円以上〜10000円以内
+            // 値段は必須、数値、0円以上〜10000円以内
             'price' => 'required|numeric|min:0|max:10000',
 
-            // c. 画像の拡張子は「.png」もしくは「.jpeg」形式でのみアップロード可能
-            // 例外の「2MB以内」のルールも追加（2048KB）
+            // 画像の拡張子は「.png」もしくは「.jpeg」形式でのみアップロード可能
+            // エラー出たため「2MB以内」のルールも使用のしやすさから追加（2048KB）
             'image' => [
                 'required',
                 'image',
@@ -39,7 +39,7 @@ class ProductStoreRequest extends FormRequest
                 'max:2048'
             ],
 
-            // 季節は必須、配列形式で、かつDBに存在するIDであること
+            // 季節は必須
             'seasons' => 'required|array|exists:seasons,id',
 
             // 入力文字数は120文字以内
