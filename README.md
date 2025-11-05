@@ -21,6 +21,9 @@ $ mv laravel-docker-template mogitate
 
 ```
 $ cd mogitate
+
+-Git hubで新しいリポジトリを作成後、SSHをコピペして紐付け先を変更
+
 $ git remote set-url origin git@github.com:renayashiki/mogitate.git
 
 $ git remote -v
@@ -38,6 +41,7 @@ $ code .
 - PHPコンテナへ移動しパッケージをインストールし、srcディレクトリ以下にvendorディレクトリを作成
 ```
 $ docker-compose exec php bash
+
 (PHPコンテナ内で)
 # composer install 
 
@@ -62,9 +66,11 @@ DB_CONNECTION=mysql
 + DB_HOST=mysql
 
 DB_PORT=3306
+
 - DB_DATABASE=laravel
 - DB_USERNAME=root
 - DB_PASSWORD=
+
 + DB_DATABASE=laravel_db
 + DB_USERNAME=laravel_user
 + DB_PASSWORD=laravel_pass
@@ -72,7 +78,9 @@ DB_PORT=3306
 // 後略
 
 ```
-- アプリケーションを実行できるようにコマンドを実行する
+- viewファイル・cssファイルを作成後、
+  アプリケーションを実行できるようにコマンドを実行する
+
 ```
 # php artisan key:generate
 
@@ -80,11 +88,11 @@ DB_PORT=3306
 
 - モデルとマイグレーションファイルを作成しコードを記述
 ```
-#  php artisan make:model Product --migration
+# php artisan make:model Product --migration
 
 # php artisan make:model Season --migration
 
-#  php artisan make:migration create_product_season_table
+# php artisan make:migration create_product_season_table
 
 ```
 
